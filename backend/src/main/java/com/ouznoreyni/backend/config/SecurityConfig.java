@@ -34,11 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/**")
+                .antMatchers(HttpMethod.GET, "/api/**")
                 .permitAll()
-                .anyRequest()
-                .authenticated().and().
-                exceptionHandling().and().sessionManagement()
+                .antMatchers(HttpMethod.POST).hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.PUT).hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasAuthority("ROLE_ADMIN")
+                .and()
+                .exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

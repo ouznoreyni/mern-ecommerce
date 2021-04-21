@@ -26,7 +26,7 @@ import java.util.Optional;
 @RestController()
 @RequestMapping("/api/auth")
 @AllArgsConstructor
-public class authentication {
+public class authenticationController {
 
     private UserService userService;
     @Autowired
@@ -38,6 +38,7 @@ public class authentication {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@Validated @RequestBody User userData) throws Exception {
         try {
@@ -45,7 +46,6 @@ public class authentication {
             if (!user.isEmpty()) {
                 throw new Exception("Username or Email is already exist");
             }
-
 
         } catch (BadCredentialsException e) {
             throw new Exception("Incorrect Data", e);
@@ -77,7 +77,6 @@ public class authentication {
     private Map<String, String> generateToken(String username) {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
-
         final String jwt = jwtProvider.generateToken(userDetails);
 
         Map<String, String> token = new HashMap<String, String>();

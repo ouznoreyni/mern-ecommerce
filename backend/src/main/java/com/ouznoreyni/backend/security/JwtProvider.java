@@ -3,6 +3,8 @@ package com.ouznoreyni.backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtProvider {
-    private String SECRET_KEY = "ouznoreyni";
+    @Autowired
+    private Environment env;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -29,7 +32,7 @@ public class JwtProvider {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(env.getProperty("jwt.signing.key")).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -38,14 +41,15 @@ public class JwtProvider {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, userDetails);
     }
 
-    private String createToken(Map<String, Object> claims, String subject) {
-
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+    private String createToken(Map<String, Object> claims, UserDetails userDetails) {
+        claims.put("role", userDetails.getAuthorities().toArray()[0]);
+        return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS256, env.getProperty("jwt.signing.key")).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
