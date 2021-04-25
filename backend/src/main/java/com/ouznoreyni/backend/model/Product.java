@@ -10,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "products")
 @Data
@@ -43,4 +45,8 @@ public class Product {
     @Column()
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
+    private List<Image> images;
+
 }
