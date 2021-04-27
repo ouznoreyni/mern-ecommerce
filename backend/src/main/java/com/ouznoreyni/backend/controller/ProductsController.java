@@ -1,6 +1,5 @@
 package com.ouznoreyni.backend.controller;
 
-import com.ouznoreyni.backend.model.Image;
 import com.ouznoreyni.backend.model.Product;
 import com.ouznoreyni.backend.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -54,27 +52,15 @@ public class ProductsController {
                                               @RequestParam("description") String description,
                                               @RequestParam("countInStock") int countInStock,
                                               @RequestParam("price") int price,
-                                              @RequestParam("images") MultipartFile[] images
-    ) throws IOException {
+                                              @RequestParam("image") MultipartFile image
+    ){
         try {
-            List<Image> imagesProduct = new ArrayList<>();
             Product product = new Product();
-
-            //upload images to blob
-            Arrays.asList(images).stream().forEach(image -> {
-                String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-                try {
-                    Image imageProduct = new Image(fileName, image.getContentType(), image.getBytes());
-                    imagesProduct.add(imageProduct);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
             product.setName(name);
             product.setPrice(price);
             product.setDescription(description);
             product.setCountInStock(countInStock);
-            product.setImages(imagesProduct);
+            product.setImage(image.getBytes());
             Product savedProduct = productService.save(product);
             return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {
