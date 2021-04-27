@@ -1,6 +1,8 @@
 package com.ouznoreyni.backend.controller;
 
+import com.ouznoreyni.backend.model.Category;
 import com.ouznoreyni.backend.model.Product;
+import com.ouznoreyni.backend.repository.CategoryRepository;
 import com.ouznoreyni.backend.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("/api")
@@ -21,6 +25,9 @@ public class ProductsController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @GetMapping("products")
     public List<Product> allProducts() {
@@ -52,15 +59,26 @@ public class ProductsController {
                                               @RequestParam("description") String description,
                                               @RequestParam("countInStock") int countInStock,
                                               @RequestParam("price") int price,
-                                              @RequestParam("image") MultipartFile image
-    ){
+                                              @RequestParam("image") MultipartFile image,
+                                              @RequestParam("categoryId") long categoryId
+    ) {
         try {
+            System.out.println(categoryId);
+            Optional<Category> category = categoryRepository.findById(categoryId);
+            System.out.println(category.get().getName());
+
+            /*if (category.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "category not found");
+            }
+
+             */
             Product product = new Product();
             product.setName(name);
             product.setPrice(price);
             product.setDescription(description);
             product.setCountInStock(countInStock);
             product.setImage(image.getBytes());
+            product.setCategory(category.get());
             Product savedProduct = productService.save(product);
             return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {

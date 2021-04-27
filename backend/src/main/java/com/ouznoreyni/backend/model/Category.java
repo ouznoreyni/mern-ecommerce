@@ -7,15 +7,17 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
-@Entity(name = "products")
+@Entity(name = "category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,22 +27,6 @@ public class Product {
     private String name;
 
     @Column()
-    @NotBlank(message = "description is required")
-    private String description;
-
-    @Column()
-    @Min(value = 0)
-    private int price;
-
-    @Column()
-    @Min(value = 0)
-    private int countInStock;
-
-    @ManyToOne
-    @JoinColumn(name="category_id", nullable=false)
-    private Category category;
-
-    @Column()
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -48,9 +34,7 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(columnDefinition = "BLOB")
-    @Lob
-    private byte[] image;
-
+    @OneToMany(mappedBy="category")
+    private List<Product> products;
 
 }
