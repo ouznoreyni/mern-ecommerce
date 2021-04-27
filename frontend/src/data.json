@@ -1,0 +1,16 @@
+{
+"products":[
+    {
+        "name":"nike chaussure",
+        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+    },
+    {
+        "name":"chemises",
+        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    },
+    {
+        "name":"bag",
+         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
+    }
+]
+}
