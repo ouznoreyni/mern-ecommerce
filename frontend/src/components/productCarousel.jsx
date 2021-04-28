@@ -19,8 +19,11 @@ const ProductCarousel = () => {
     <Slider {...settings}>
       {products.map((product) => (
         <div key={product.name} className='w-full max-h-96'>
-          <h3>{product.name}</h3>
-          <img className='max-h-96' src={product.image} alt={product.name} />
+          <img
+            className='max-h-full max-w-full'
+            src={product.image}
+            alt={product.name}
+          />
         </div>
       ))}
     </Slider>
