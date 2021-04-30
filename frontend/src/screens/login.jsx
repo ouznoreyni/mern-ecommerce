@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Required').min(5).max(50),
@@ -60,7 +63,11 @@ const Login = (props) => {
                         id='username'
                         onChange={handleChange}
                         placeholder='ouznoreyni221'
-                        className='w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-400 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                        className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-400 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ${
+                          errors.username &&
+                          touched.username &&
+                          'border-red-500'
+                        }`}
                       />
                       {errors.username && touched.username && (
                         <div className='text-red-500'>{errors.username}</div>
@@ -82,7 +89,11 @@ const Login = (props) => {
                         value={values.password}
                         onChange={handleChange}
                         placeholder='votre Password'
-                        className='w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                        className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ${
+                          errors.password &&
+                          touched.password &&
+                          'border-red-500'
+                        }`}
                       />
                       {errors.password && touched.password && (
                         <div className='text-red-600'>{errors.password}</div>
