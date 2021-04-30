@@ -1,101 +1,119 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-const Login = () => {
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required('Required').min(5).max(50),
+  password: Yup.string().required('Required').min(5).max(50),
+});
+
+const Login = (props) => {
+  const onSubmit = async (values) => {
+    console.log('====================================');
+    console.log(values);
+    console.log('====================================');
+    // dispatch(loginUser(credential));
+  };
+
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
-        <div>
-          <img
-            className='mx-auto h-12 w-auto'
-            src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-            alt='Workflow'
-          />
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Sign in to your account
-          </h2>
-          <p className='mt-2 text-center text-sm text-gray-600'>
-            Or{' '}
-            <a
-              href='#'
-              className='font-medium text-indigo-600 hover:text-indigo-500'
-            >
-              start your 14-day free trial
-            </a>
-          </p>
+    <>
+      <div className='flex items-center min-h-screen bg-white dark:bg-gray-900'>
+        <div className='container mx-auto shadow-2xl'>
+          <div className='max-w-md mx-auto my-10'>
+            <div className='text-center'>
+              <h1 className='my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200'>
+                Se connecter
+              </h1>
+              <p className='text-gray-500 dark:text-gray-400'>
+                Connecter-vous pour accéder à votre compte
+              </p>
+            </div>
+            <div className='m-7'>
+              <Formik
+                initialValues={{ username: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+                  /* and other goodies */
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <div className='mb-6'>
+                      <label
+                        htmlFor='username'
+                        className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
+                      >
+                        Nom d'utilisateur
+                      </label>
+                      <input
+                        value={values.username}
+                        type='text'
+                        name='username'
+                        id='username'
+                        onChange={handleChange}
+                        placeholder='ouznoreyni221'
+                        className='w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-400 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                      />
+                      {errors.username && touched.username && (
+                        <div className='text-red-500'>{errors.username}</div>
+                      )}
+                    </div>
+                    <div className='mb-6'>
+                      <div className='flex justify-between mb-2'>
+                        <label
+                          htmlFor='password'
+                          className='text-sm text-gray-600 dark:text-gray-400'
+                        >
+                          Password
+                        </label>
+                      </div>
+                      <input
+                        type='password'
+                        name='password'
+                        id='password'
+                        value={values.password}
+                        onChange={handleChange}
+                        placeholder='votre Password'
+                        className='w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                      />
+                      {errors.password && touched.password && (
+                        <div className='text-red-600'>{errors.password}</div>
+                      )}
+                    </div>
+                    <div className='mb-6'>
+                      <button
+                        type='submit'
+                        className='w-full px-3 py-4 text-white bg-green-500 rounded-md focus:bg-green-600 focus:outline-none'
+                      >
+                        Connexion
+                      </button>
+                    </div>
+                    <p className='text-sm text-center text-gray-400'>
+                      Vous n&#x27;avez pas encore un compte?{' '}
+                      <Link
+                        to='/register'
+                        className='text-blue-400 focus:outline-none focus:underline focus:text-blue-500 dark:focus:border-blue-800'
+                      >
+                        Inscrivez vous!
+                      </Link>
+                      .
+                    </p>
+                  </form>
+                )}
+              </Formik>
+            </div>
+          </div>
         </div>
-        <form className='mt-8 space-y-6' action='#' method='POST'>
-          <input type='hidden' name='remember' defaultValue='true' />
-          <div className='rounded-md shadow-sm -space-y-px'>
-            <div>
-              <label htmlFor='email-address' className='sr-only'>
-                Email address
-              </label>
-              <input
-                id='email-address'
-                name='email'
-                type='email'
-                autoComplete='email'
-                required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Email address'
-              />
-            </div>
-            <div>
-              <label htmlFor='password' className='sr-only'>
-                Password
-              </label>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                autoComplete='current-password'
-                required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Password'
-              />
-            </div>
-          </div>
-
-          <div className='flex items-center justify-between'>
-            <div className='flex items-center'>
-              <input
-                id='remember_me'
-                name='remember_me'
-                type='checkbox'
-                className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
-              />
-              <label
-                htmlFor='remember_me'
-                className='ml-2 block text-sm text-gray-900'
-              >
-                Remember me
-              </label>
-            </div>
-
-            <div className='text-sm'>
-              <a
-                href='#'
-                className='font-medium text-indigo-600 hover:text-indigo-500'
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            >
-              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-                close
-              </span>
-              Sign in
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -9,9 +9,11 @@ const Header = () => {
         </div>
         <div className=''>
           <div>
-            <button className='bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md px-2'>
-              <span className='mr-2'>mon compte</span>
-            </button>
+            <Link to='/login'>
+              <button className='bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md px-2'>
+                <span className='mr-2'>mon compte</span>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
