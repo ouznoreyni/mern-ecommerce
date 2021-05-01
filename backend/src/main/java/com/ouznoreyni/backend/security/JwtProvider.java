@@ -47,6 +47,7 @@ public class JwtProvider {
     private String createToken(Map<String, Object> claims, UserDetails userDetails) {
         claims.put("role", userDetails.getAuthorities().toArray()[0]);
         return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
+                .setHeaderParam("typ", "JWT")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, env.getProperty("jwt.signing.key")).compact();

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../store/authSlice';
+import authService from '../services/authService';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Required').min(5).max(50),
@@ -12,11 +13,24 @@ const validationSchema = Yup.object().shape({
 });
 
 const Login = (props) => {
-  const onSubmit = async (values) => {
+  const dispatch = useDispatch();
+  const authSelector = useSelector((state) => state.auth);
+
+  const redirect = props.location.search
+    ? props.location.search.split('=')[1]
+    : '/';
+
+  useEffect(() => {
+    if (authService.getToken()) {
+      props.history.push(redirect);
+    }
+  }, []);
+
+  const onSubmit = async (credentials) => {
     console.log('====================================');
-    console.log(values);
+    console.log(credentials);
     console.log('====================================');
-    // dispatch(loginUser(credential));
+    dispatch(loginUser(credentials));
   };
 
   return (
