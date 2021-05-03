@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -14,15 +14,25 @@ const validationSchema = Yup.object().shape({
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const authSelector = useSelector((state) => state.auth);
 
-  const redirect = props.location.search
-    ? props.location.search.split('=')[1]
-    : '/';
-
   useEffect(() => {
+    console.log('fetch');
     if (authService.getToken()) {
-      props.history.push(redirect);
+      try {
+        const { role } = authService.decodedToken();
+        if (role.authority == 'ROLE_ADMIN') {
+          history.push('/admin/dashboard');
+        }
+        if (role.authority == 'ROLE_USER') {
+          history.push('/customer/dashboard');
+        }
+      } catch (error) {
+        console.log('====================================');
+        console.log(error);
+        console.log('====================================');
+      }
     }
   }, []);
 

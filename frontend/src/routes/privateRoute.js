@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Route, Redirect, useHistory } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 const privateRoute = () => {

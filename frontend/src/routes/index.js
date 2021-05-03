@@ -7,6 +7,8 @@ import Home from '../screens/home';
 import ErrorPage from '../screens/errorPage';
 import About from '../screens/about';
 import Contact from '../screens/contact';
+import AdminRoute from './adminRoute';
+import Dashboard from '../screens/admin/dashboard';
 
 const index = () => {
   return (
@@ -26,6 +28,7 @@ const index = () => {
       <Route exact path='/'>
         <Home />
       </Route>
+      <AdminRoute path='/admin/dashboard' component={Dashboard} />
       <Route path='*'>
         <ErrorPage />
       </Route>

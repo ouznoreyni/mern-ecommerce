@@ -1,4 +1,7 @@
+import jwtDecode from 'jwt-decode';
+
 import http from './httpService';
+
 const TOKEN = 'token';
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -13,5 +16,13 @@ const register = async (data) => {};
 const saveToken = (token) => localStorage.setItem(TOKEN, token);
 const getToken = () => localStorage.getItem(TOKEN);
 const removeToken = () => localStorage.removeItem(TOKEN);
+const decodedToken = () => jwtDecode(getToken());
 
-export default { login, register, saveToken, getToken, removeToken };
+export default {
+  login,
+  register,
+  saveToken,
+  getToken,
+  removeToken,
+  decodedToken,
+};

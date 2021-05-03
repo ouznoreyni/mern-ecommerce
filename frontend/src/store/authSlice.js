@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import auth from '../services/authService';
 import jwtDecode from 'jwt-decode';
+import authService from '../services/authService';
 
 export const loginUser = createAsyncThunk(
   'auth/login',
@@ -8,6 +9,7 @@ export const loginUser = createAsyncThunk(
     try {
       const { data } = await auth.login(credential);
       if (data) {
+        authService.saveToken(data.token);
         return jwtDecode(data.token);
       }
     } catch ({ response }) {
