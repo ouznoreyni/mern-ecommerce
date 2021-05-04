@@ -7,6 +7,7 @@ import App from './App';
 import store from './store/configureStore';
 
 import reportWebVitals from './reportWebVitals';
+import Dashboard from './screens/admin/dashboard';
 
 ReactDOM.render(
   <React.StrictMode>

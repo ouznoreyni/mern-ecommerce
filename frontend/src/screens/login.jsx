@@ -18,7 +18,6 @@ const Login = (props) => {
   const authSelector = useSelector((state) => state.auth);
 
   useEffect(() => {
-    console.log('fetch');
     if (authService.getToken()) {
       try {
         const { role } = authService.decodedToken();
@@ -29,17 +28,12 @@ const Login = (props) => {
           history.push('/customer/dashboard');
         }
       } catch (error) {
-        console.log('====================================');
         console.log(error);
-        console.log('====================================');
       }
     }
   }, []);
 
   const onSubmit = async (credentials) => {
-    console.log('====================================');
-    console.log(credentials);
-    console.log('====================================');
     dispatch(loginUser(credentials));
   };
 
