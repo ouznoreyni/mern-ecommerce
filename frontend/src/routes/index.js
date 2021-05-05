@@ -9,12 +9,16 @@ import About from '../screens/about';
 import Contact from '../screens/contact';
 import AdminRoute from './adminRoute';
 import Dashboard from '../screens/admin/dashboard';
+import Products from '../screens/products';
 
 const index = () => {
   return (
     <Switch>
       <Route exact path='/register'>
         <Register />
+      </Route>
+      <Route exact path='/products'>
+        <Products />
       </Route>
       <Route exact path='/login'>
         <Login />
