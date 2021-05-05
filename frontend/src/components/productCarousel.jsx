@@ -13,7 +13,7 @@ const ProductCarousel = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
-  const [products, setproducts] = useState(data.products);
+  const [products, setproducts] = useState(data.products.slice(0, 3));
 
   return (
     <Slider {...settings}>
