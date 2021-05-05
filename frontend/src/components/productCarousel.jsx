@@ -18,7 +18,7 @@ const ProductCarousel = () => {
   return (
     <Slider {...settings}>
       {products.map((product) => (
-        <div key={product.name} className='w-full max-h-96'>
+        <div key={product.name} className='w-full max-h-72'>
           <img
             className='max-h-full max-w-full'
             src={product.image}

@@ -3,9 +3,11 @@ import ProductCarousel from '../components/productCarousel';
 
 const Home = () => {
   return (
-    <div>
+    <div className='w-full'>
       {/* slide des produits */}
-      <ProductCarousel />
+      <div className='container mx-auto'>
+        <ProductCarousel />
+      </div>
       {/* slide des produits */}
       {/* info and satisfaction */}
       <div class='grid grid-flow-col grid-cols-4 grid-rows-1 gap-4 mt-10 p-5 border-2 w-4/5 ml-24'>
@@ -32,7 +34,7 @@ const Home = () => {
       </div>
       {/* info and satisfaction */}
       {/* lastest and top products */}
-      <div className='my-10 bg-gray-500 h-44'></div>
+      <div className='my-10 bg-gray-500 h-44'>oeoe</div>
       {/* end lastest and top products */}
     </div>
   );
