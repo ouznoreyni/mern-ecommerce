@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import Register from '../screens/register';
 import Login from '../screens/login';
@@ -10,7 +10,7 @@ import Contact from '../screens/contact';
 import AdminRoute from './adminRoute';
 import Dashboard from '../screens/admin/dashboard';
 import Products from '../screens/products';
-import ProductDeatails from '../screens/productDeatails';
+import ProductDetails from '../screens/productDetails';
 
 const index = () => {
   return (
@@ -22,7 +22,7 @@ const index = () => {
         <Products />
       </Route>
       <Route exact path='/products/:id'>
-        <ProductDeatails />
+        <ProductDetails />
       </Route>
 
       <Route exact path='/login'>

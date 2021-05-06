@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../store/authSlice';
 import authService from '../services/authService';
+import Header from '../components/header/header';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Required').min(5).max(50),
@@ -15,7 +16,7 @@ const validationSchema = Yup.object().shape({
 const Login = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const authSelector = useSelector((state) => state.auth);
+  // const authSelector = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (authService.getToken()) {
@@ -39,6 +40,7 @@ const Login = (props) => {
 
   return (
     <>
+      <Header />
       <div className='flex items-center min-h-screen bg-white dark:bg-gray-900'>
         <div className='container mx-auto shadow-2xl'>
           <div className='max-w-md mx-auto my-10'>

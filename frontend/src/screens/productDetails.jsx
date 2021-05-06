@@ -5,7 +5,7 @@ import Header from '../components/header/header';
 import { products } from '../data.json';
 import Footer from './footer';
 
-const ProductDeatails = (props) => {
+const ProductDetails = (props) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
   const history = useHistory();
@@ -140,4 +140,4 @@ const ProductDeatails = (props) => {
   );
 };
 
-export default ProductDeatails;
+export default ProductDetails;

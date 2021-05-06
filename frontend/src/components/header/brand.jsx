@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Brand = () => {
   return (
@@ -30,18 +31,18 @@ const Brand = () => {
           </a>
         </div> */}
         <div class='flex text-sm'>
-          <a
+          <Link
             class='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-            href='/auth/signin'
+            to='/login'
           >
             connexion
-          </a>
-          <a
+          </Link>
+          <Link
             class='p-2 ml-2 bg-teal-500 text-black bg-white font-semibold leading-none border border-gray-700 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-            href='/auth/signup'
+            to='/register'
           >
             creer compte
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
