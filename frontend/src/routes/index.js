@@ -10,6 +10,7 @@ import Contact from '../screens/contact';
 import AdminRoute from './adminRoute';
 import Dashboard from '../screens/admin/dashboard';
 import Products from '../screens/products';
+import ProductDeatails from '../screens/productDeatails';
 
 const index = () => {
   return (
@@ -20,6 +21,10 @@ const index = () => {
       <Route exact path='/products'>
         <Products />
       </Route>
+      <Route exact path='/products/:id'>
+        <ProductDeatails />
+      </Route>
+
       <Route exact path='/login'>
         <Login />
       </Route>

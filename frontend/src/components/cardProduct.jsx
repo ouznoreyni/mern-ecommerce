@@ -5,7 +5,7 @@ const CardProduct = ({ product }) => {
   return (
     <div>
       <Link
-        to='#'
+        to={`/products/${product.id}`}
         className='block h-64 rounded-lg shadow-lg bg-gray-600'
         style={{
           backgroundImage: `url(${product.image})`,
@@ -14,7 +14,7 @@ const CardProduct = ({ product }) => {
       ></Link>
       <div className='flex items-center justify-between mt-3'>
         <div>
-          <Link to='#' className='font-medium'>
+          <Link to={`/products/${product.id}`} className='font-medium'>
             {product.name}
           </Link>
           <Link className='flex items-center' to='#'>

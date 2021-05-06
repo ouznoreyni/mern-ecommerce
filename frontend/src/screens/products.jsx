@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardProduct from '../components/cardProduct';
 import Header from '../components/header/header';
 import MenuSideBar from '../components/menuSideBar';
 import Pagination from '../components/pagination';
 import Footer from './footer';
+import data from '../data.json';
 
 const Products = () => {
+  const [products, setProducts] = useState(data.products.slice(0, 8));
   return (
     <>
       <Header />
@@ -79,13 +81,9 @@ const Products = () => {
             </button>
           </div>
           <div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6  p-8'>
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
+            {products.map((p) => (
+              <CardProduct product={p} />
+            ))}
           </div>
           <Pagination />
         </div>

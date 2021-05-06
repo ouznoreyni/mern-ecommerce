@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -18,12 +19,15 @@ const ProductCarousel = () => {
   return (
     <Slider {...settings}>
       {products.map((product) => (
-        <div key={product.name} className='w-full max-h-72'>
-          <img
-            className='max-h-full max-w-full'
-            src={product.image}
-            alt={product.name}
-          />
+        <div key={product.name}>
+          <Link
+            to='#'
+            className='block h-80 rounded-lg shadow-lg bg-gray-600'
+            style={{
+              backgroundImage: `url(${product.image})`,
+              backgroundSize: 'cover',
+            }}
+          ></Link>
         </div>
       ))}
     </Slider>
