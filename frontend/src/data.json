@@ -1,72 +1,116 @@
 {
-"products":[
-    {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }
-    , {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }, {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }, {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }, {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }, {
-        "name":"nike chaussure",
-        "image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-    },
-    {
-        "name":"chemises",
-        "image":"https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-    },
-    {
-        "name":"bag",
-         "image":"https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80"
-    }
-]
+    "products": [
+        {
+            "id": 1,
+            "name": "nike chaussure",
+            "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "nike",
+            "category": {
+                "name": "chaussure"
+            },
+            "price": 15000,
+            "countInStock": 3,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 2,
+            "name": "Sac",
+            "image": "https://images.unsplash.com/photo-1610933622640-a693fca4f7b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "vuiton",
+            "category": {
+                "name": "accessoir"
+            },
+            "price": 6000,
+            "countInStock": 10,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 3,
+            "name": "Chemise",
+            "image": "https://images.unsplash.com/photo-1615441210794-4f445ff3cb24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "Guicci",
+            "category": {
+                "name": "vetement"
+            },
+            "price": 7500,
+            "countInStock": 0,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 4,
+            "name": "AIR JORDAN 12 GYM RED",
+            "image": "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "JORDAN",
+            "category": {
+                "name": "chaussure"
+            },
+            "price": 20000,
+            "countInStock": 10,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 5,
+            "name": "chaussure femme",
+            "image": "https://images.unsplash.com/photo-1515651673377-6abc94e6e889?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1866&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "unknow",
+            "category": {
+                "name": "chaussure"
+            },
+            "price": 9000,
+            "countInStock": 7,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 6,
+            "name": "Sac  cuire",
+            "image": "https://images.unsplash.com/photo-1608731267464-c0c889c2ff92?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=633&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "cuire",
+            "category": {
+                "name": "accessoir"
+            },
+            "price": 10000,
+            "countInStock": 0,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 7,
+            "name": "Sac  femme",
+            "image": "https://images.unsplash.com/photo-1587467512961-120760940315?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "cuire",
+            "category": {
+                "name": "accessoir"
+            },
+            "price": 8500,
+            "countInStock": 0,
+            "rating": 0,
+            "numReviews": 0
+        },
+        {
+            "id": 8,
+            "name": "Jean",
+            "image": "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus nulla quod veritatis error fugit unde, asperiores commodi omnis sapiente repudiandae perspiciatis cumque sequi doloribus maxime impedit nobis ad soluta iusto!",
+            "brand": "kaki",
+            "category": {
+                "name": "vetements"
+            },
+            "price": 7500,
+            "countInStock": 0,
+            "rating": 0,
+            "numReviews": 0
+        }
+    ]
 }

@@ -9,7 +9,7 @@ const Products = () => {
   return (
     <>
       <Header />
-      <h1 class='text-3xl'>Product Category Page Title</h1>
+      <h1 class='text-3xl'>Liste des produits</h1>
       <div class='grid grid-cols-4 gap-4 mt-10'>
         {/* menu of the sidebar */}
         <div class='xl:col-span-1 lg:col-span-1  col-span-4'>

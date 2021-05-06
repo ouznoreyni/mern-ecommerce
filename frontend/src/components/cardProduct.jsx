@@ -1,23 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CardProduct = () => {
+const CardProduct = ({ product }) => {
   return (
     <div>
-      <a href='#' class='block h-64 rounded-lg shadow-lg bg-gray-600'></a>
-      <div class='flex items-center justify-between mt-3'>
+      <Link
+        to='#'
+        className='block h-64 rounded-lg shadow-lg bg-gray-600'
+        style={{
+          backgroundImage: `url(${product.image})`,
+          backgroundSize: 'cover',
+        }}
+      ></Link>
+      <div className='flex items-center justify-between mt-3'>
         <div>
-          <a href='#' class='font-medium'>
-            Product Name
-          </a>
-          <a class='flex items-center' href='#'>
-            <span class='text-xs font-medium text-gray-600'>by</span>
-            <span class='text-xs font-medium ml-1 text-indigo-500'>
-              Store Name
+          <Link to='#' className='font-medium'>
+            {product.name}
+          </Link>
+          <Link className='flex items-center' to='#'>
+            <span className='text-xs font-medium text-gray-600'>by</span>
+            <span className='text-xs font-medium ml-1 text-indigo-500'>
+              {product.brand}
             </span>
-          </a>
+          </Link>
         </div>
-        <span class='flex items-center h-8 bg-indigo-200 text-indigo-600 text-sm px-2 rounded'>
-          $34
+        <span className='flex items-center h-8 bg-indigo-200 text-indigo-600 text-sm px-2 rounded'>
+          {product.price}
+          <span className='text-xs ml-1 text-red-700'>f cfa</span>
         </span>
       </div>
     </div>
