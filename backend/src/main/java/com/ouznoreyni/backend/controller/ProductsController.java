@@ -35,8 +35,8 @@ public class ProductsController {
     public List<Product> allProducts(@RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "3") int size) {
         try {
-           Pageable pageable= PageRequest.of(page, size);
-           List<Product> products = productService.getAll(pageable).getContent();
+            Pageable pageable = PageRequest.of(page, size);
+            List<Product> products = productService.getAll(pageable).getContent();
             System.out.println(products);
             return products;
         } catch (Exception e) {
@@ -53,8 +53,7 @@ public class ProductsController {
                 errorMessage.put("message", "product with id " + id + " does not exist");
                 return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
             }
-            return
-                    new ResponseEntity<>(product, HttpStatus.OK);
+            return new ResponseEntity<>(product, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "AN error happen when adding a product", e);
         }
