@@ -108,4 +108,15 @@ public class CategoriesController {
         }
 
     }
+
+    @DeleteMapping(path = "/categories/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        try {
+            categoryService.deletedById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An error happen when deleting a category", e);
+        }
+    }
 }
