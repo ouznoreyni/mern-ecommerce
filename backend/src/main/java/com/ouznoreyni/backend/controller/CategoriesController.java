@@ -9,9 +9,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -50,6 +55,28 @@ public class CategoriesController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PostMapping(path = "/categories")
+    public ResponseEntity<?> createCategory(@Validated @RequestBody Category category, BindingResult bindingResult) {
+        try {
+            if (bindingResult.hasErrors()) {
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                Map<String, Object> response = new HashMap<>();
+                for (FieldError e : errors) {
+                    response.put(e.getField(), e.getDefaultMessage());
+                }
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+            } else {
+                Category categorySaved = categoryService.save(category);
+                return new ResponseEntity<>(categorySaved, HttpStatus.CREATED);
+            }
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An error happen when adding a category");
         }
 
     }

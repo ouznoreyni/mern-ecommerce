@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "category")
 @Data
@@ -24,7 +23,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column()
+    @Column(unique = true)
     @NotBlank(message = "name is required")
     private String name;
 
@@ -36,7 +35,7 @@ public class Category implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Product> products;
 
