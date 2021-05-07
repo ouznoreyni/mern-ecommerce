@@ -6,6 +6,8 @@ import com.ouznoreyni.backend.repository.CategoryRepository;
 import com.ouznoreyni.backend.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +32,13 @@ public class ProductsController {
     CategoryRepository categoryRepository;
 
     @GetMapping("products")
-    public List<Product> allProducts() {
+    public List<Product> allProducts(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "3") int size) {
         try {
-            return productService.getAll();
+           Pageable pageable= PageRequest.of(page, size);
+           List<Product> products = productService.getAll(pageable).getContent();
+            System.out.println(products);
+            return products;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "internal error happen", e);
         }
