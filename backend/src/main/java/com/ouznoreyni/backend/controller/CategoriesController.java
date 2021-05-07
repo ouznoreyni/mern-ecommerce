@@ -80,4 +80,32 @@ public class CategoriesController {
         }
 
     }
+
+    @PutMapping(path = "/categories/{id}")
+    public ResponseEntity<?> editCategory(@PathVariable("id") Long id, @Validated @RequestBody Category data, BindingResult bindingResult) {
+        try {
+            Optional<Category> category = categoryService.findById(id);
+            Map<String, String> categoryExist = CheckIsExist.checkValue(category, "category", id);
+            if (categoryExist.containsKey("message")) {
+                return new ResponseEntity<>(categoryExist, HttpStatus.NOT_FOUND);
+            }
+            if (bindingResult.hasErrors()) {
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                Map<String, Object> response = new HashMap<>();
+                for (FieldError e : errors) {
+                    response.put(e.getField(), e.getDefaultMessage());
+                }
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+            } else {
+                category.get().setName(data.getName());
+                Category categoryEdited = categoryService.save(category.get());
+                return new ResponseEntity<>(categoryEdited, HttpStatus.CREATED);
+            }
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An error happen when editing a category");
+        }
+
+    }
 }
