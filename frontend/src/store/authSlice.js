@@ -28,7 +28,7 @@ const authSlice = createSlice({
     errorMessage: '',
   },
   reducers: {
-    userlogin: (user, { payload }) => {
+    setUser: (user, { payload }) => {
       console.log('user ', user);
       console.log('payload ', payload);
     },
@@ -55,6 +55,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loadAuthenticatedUser } = authSlice.actions;
+export const { loadAuthenticatedUser, userlogin, setUser } = authSlice.actions;
 
 export default authSlice;
