@@ -12,6 +12,9 @@ import Dashboard from '../screens/admin/dashboard';
 import Products from '../screens/products';
 import ProductDetails from '../screens/productDetails';
 import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
+import CategoryListAdmin from '../screens/admin/categories/CategoryListAdmin';
+import CustomersListAdmin from '../screens/admin/customers/CustomersListAdmin';
+import OrderListAdmin from '../screens/admin/orders/OrderListAdmin';
 
 const index = () => {
   return (
@@ -43,6 +46,16 @@ const index = () => {
         path='/admin/products'
         component={ProductListAdmin}
       ></AdminRoute>
+      <AdminRoute
+        path='/admin/categories'
+        component={CategoryListAdmin}
+      ></AdminRoute>
+      <AdminRoute
+        path='/admin/customers'
+        component={CustomersListAdmin}
+      ></AdminRoute>
+      <AdminRoute path='/admin/orders' component={OrderListAdmin}></AdminRoute>
+
       <Route path='*'>
         <ErrorPage />
       </Route>
