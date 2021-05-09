@@ -116,7 +116,7 @@ const AdminLayout = ({ children }) => {
               </div>
             </div>
           </header>
-          <main className='flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 '>
+          <main className='flex-1 overflow-x-hidden overflow-y-auto  '>
             <div className='container mx-auto px-6 py-8'>{children}</div>
           </main>
         </div>
