@@ -28,10 +28,13 @@ const authSlice = createSlice({
     errorMessage: '',
   },
   reducers: {
-    setUser: (user, { payload }) => {
-      console.log('user ', user);
-      console.log('payload ', payload);
-    },
+    setUser: (user, { payload }) => ({
+      userLogin: payload,
+      isFetching: false,
+      isSuccess: true,
+      isError: false,
+      errorMessage: '',
+    }),
     logout: (state) => {
       return state;
     },

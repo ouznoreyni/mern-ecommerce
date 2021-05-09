@@ -12,12 +12,7 @@ function App() {
 
   useEffect(() => {
     const decodedToken = authService.decodedToken();
-    console.log('====================================');
     dispatch(setUser(decodedToken));
-    console.log('staing', decodedToken);
-
-    console.log('====================================');
-    return () => {};
   }, []);
   return (
     <div className='mx-auto'>
