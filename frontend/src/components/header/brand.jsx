@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Brand = () => {
+  const state = useSelector((state) => state.auth);
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    setCurrentUser(state.currentUser);
+    return () => {};
+  }, []);
   return (
     <nav class='flex justify-between w-full topHeader text-white p-4'>
       <a href='/'>
@@ -30,19 +38,31 @@ const Brand = () => {
             Link 4
           </a>
         </div> */}
+
         <div class='flex text-sm'>
-          <Link
-            class='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-            to='/login'
-          >
-            connexion
-          </Link>
-          <Link
-            class='p-2 ml-2 bg-teal-500 text-black bg-white font-semibold leading-none border border-gray-700 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-            to='/register'
-          >
-            creer compte
-          </Link>
+          {currentUser ? (
+            <Link
+              class='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
+              to='/admin/dashboard'
+            >
+              {currentUser.sub}
+            </Link>
+          ) : (
+            <>
+              <Link
+                class='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
+                to='/login'
+              >
+                connexion
+              </Link>
+              <Link
+                class='p-2 ml-2 bg-teal-500 text-black bg-white font-semibold leading-none border border-gray-700 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
+                to='/register'
+              >
+                creer compte
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

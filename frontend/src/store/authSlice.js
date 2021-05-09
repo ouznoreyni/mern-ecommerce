@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    userLogin: {},
+    currentUser: {},
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -29,7 +29,7 @@ const authSlice = createSlice({
   },
   reducers: {
     setUser: (user, { payload }) => ({
-      userLogin: payload,
+      currentUser: payload,
       isFetching: false,
       isSuccess: true,
       isError: false,
@@ -46,7 +46,7 @@ const authSlice = createSlice({
       isSuccess: true,
       isError: false,
       errorMessage: '',
-      userLogin: payload,
+      currentUser: payload,
     }),
     [loginUser.rejected]: (state, { payload }) => ({
       ...state,
@@ -58,6 +58,10 @@ const authSlice = createSlice({
   },
 });
 
-export const { loadAuthenticatedUser, userlogin, setUser } = authSlice.actions;
+export const {
+  loadAuthenticatedUser,
+  currentUser,
+  setUser,
+} = authSlice.actions;
 
 export default authSlice;

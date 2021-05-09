@@ -11,6 +11,7 @@ import AdminRoute from './adminRoute';
 import Dashboard from '../screens/admin/dashboard';
 import Products from '../screens/products';
 import ProductDetails from '../screens/productDetails';
+import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
 
 const index = () => {
   return (
@@ -37,7 +38,11 @@ const index = () => {
       <Route exact path='/'>
         <Home />
       </Route>
-      <AdminRoute path='/admin/dashboard' component={Dashboard} />
+      <AdminRoute path='/admin/dashboard' component={Dashboard}></AdminRoute>
+      <AdminRoute
+        path='/admin/products'
+        component={ProductListAdmin}
+      ></AdminRoute>
       <Route path='*'>
         <ErrorPage />
       </Route>

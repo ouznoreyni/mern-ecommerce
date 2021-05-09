@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import NavAdminItem from './NavAdminItem';
 
 const AdminLayout = ({ children }) => {
@@ -30,7 +31,7 @@ const AdminLayout = ({ children }) => {
                 href='#'
               ></div>
               <span className='text-white text-2xl mx-2 font-semibold'>
-                Noreyni-Store
+                <Link to='/admin/dashboard'> Noreyni-Store</Link>
               </span>
             </div>
           </div>
@@ -39,7 +40,7 @@ const AdminLayout = ({ children }) => {
             <NavAdminItem
               name='Dashboard'
               iconClass='fas fa-th-list'
-              urlPath='/admin/dasboard'
+              urlPath='/admin/dashboard'
             />
 
             <NavAdminItem
@@ -87,10 +88,21 @@ const AdminLayout = ({ children }) => {
             </div>
 
             <div className='flex items-center'>
-              <div x-data='{ notificationOpen: false }' className='relative'>
-                <button className='flex mx-4 text-gray-600 focus:outline-none'>
+              <div className='relative'>
+                <Link
+                  to='/'
+                  className='flex mx-4 text-gray-600 focus:outline-none'
+                >
+                  <i class='fas fa-home'></i>
+                </Link>
+              </div>
+              <div className='relative'>
+                <Link
+                  to='#'
+                  className='flex mx-4 text-gray-600 focus:outline-none'
+                >
                   <i className='far fa-bell'></i>
-                </button>
+                </Link>
               </div>
 
               <div className='relative'>
