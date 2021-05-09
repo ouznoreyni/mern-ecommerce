@@ -1,6 +1,7 @@
 import React from 'react';
 import CardItemInfo from '../../components/admin/CardItemInfo';
 import AdminLayout from '../../components/adminLayout/AdminLayout';
+import Test from '../../components/chart/Test';
 
 const Dashboard = () => {
   return (
@@ -15,6 +16,9 @@ const Dashboard = () => {
         <CardItemInfo title='Total commande' count='60' />
         <CardItemInfo title='Total livré' count='45' />
         <CardItemInfo title='Revenu total' count='150000' />
+      </div>
+      <div className='mt-2'>
+        <Test />
       </div>
     </AdminLayout>
   );

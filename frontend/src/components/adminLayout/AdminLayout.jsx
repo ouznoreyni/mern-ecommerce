@@ -109,7 +109,7 @@ const AdminLayout = ({ children }) => {
                 <button className='relative block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none'>
                   <img
                     className='h-full w-full object-cover'
-                    src='https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=296&amp;q=80'
+                    src='https://avatars.githubusercontent.com/u/41347210?v=4'
                     alt='Your avatar'
                   />
                 </button>
