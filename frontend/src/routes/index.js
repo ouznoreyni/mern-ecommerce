@@ -15,6 +15,7 @@ import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
 import CategoryListAdmin from '../screens/admin/categories/CategoryListAdmin';
 import CustomersListAdmin from '../screens/admin/customers/CustomersListAdmin';
 import OrderListAdmin from '../screens/admin/orders/OrderListAdmin';
+import ErrorAdminPages from '../screens/admin/ErrorAdminPages';
 
 const index = () => {
   return (
@@ -56,6 +57,7 @@ const index = () => {
       ></AdminRoute>
       <AdminRoute path='/admin/orders' component={OrderListAdmin}></AdminRoute>
 
+      <AdminRoute path='/admin/*' component={ErrorAdminPages}></AdminRoute>
       <Route path='*'>
         <ErrorPage />
       </Route>

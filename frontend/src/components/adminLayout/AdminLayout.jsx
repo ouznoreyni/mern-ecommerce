@@ -98,7 +98,7 @@ const AdminLayout = ({ children }) => {
               </div>
               <div className='relative'>
                 <Link
-                  to='#'
+                  to='/admin/notification'
                   className='flex mx-4 text-gray-600 focus:outline-none'
                 >
                   <i className='far fa-bell'></i>
