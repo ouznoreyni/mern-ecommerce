@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import data from '../data.json';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import data from "../data.json";
 
 const ProductCarousel = () => {
   var settings = {
@@ -14,18 +14,18 @@ const ProductCarousel = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
-  const [products, setproducts] = useState(data.products.slice(0, 3));
+  const [products] = useState(data.products.slice(0, 3));
 
   return (
     <Slider {...settings}>
       {products.map((product) => (
         <div key={product.name}>
           <Link
-            to='#'
-            className='block h-80 rounded-lg shadow-lg bg-gray-600'
+            to="#"
+            className="block h-80 rounded-lg shadow-lg bg-gray-600"
             style={{
               backgroundImage: `url(${product.image})`,
-              backgroundSize: 'cover',
+              backgroundSize: "cover",
             }}
           ></Link>
         </div>

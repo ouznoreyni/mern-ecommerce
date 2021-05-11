@@ -18,10 +18,11 @@ function setJWT(jwt) {
   instance.defaults.headers.common['x-auth-token'] = jwt;
 }
 
-export default {
+const httpService={
   setJWT,
   get: instance.get,
   post: instance.post,
   put: instance.put,
   delete: instance.delete,
 };
+export default  httpService;

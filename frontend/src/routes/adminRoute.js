@@ -8,7 +8,7 @@ const AdminRoute = ({ component: Component, render, ...rest }) => {
 
   useEffect(() => {
     try {
-      if (currentUser && currentUser.role.authority == 'ROLE_ADMIN') {
+      if (currentUser && currentUser.role.authority === 'ROLE_ADMIN') {
         setIsAdmin(true);
       } else {
         setIsAdmin(false);
@@ -17,8 +17,7 @@ const AdminRoute = ({ component: Component, render, ...rest }) => {
       console.log(error);
     }
    
-    return () => {};
-  }, []);
+  }, [currentUser]);
   return (
     <Route
       {...rest}

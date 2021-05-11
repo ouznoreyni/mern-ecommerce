@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
-
 import http from './httpService';
+
 
 const TOKEN = 'token';
 const headers = {
@@ -18,7 +18,7 @@ const getToken = () => localStorage.getItem(TOKEN);
 const removeToken = () => localStorage.removeItem(TOKEN);
 const decodedToken = () => jwtDecode(getToken());
 
-export default {
+const authService={
   login,
   register,
   saveToken,
@@ -26,3 +26,5 @@ export default {
   removeToken,
   decodedToken,
 };
+
+export default  authService;
