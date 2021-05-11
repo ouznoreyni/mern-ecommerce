@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 
-const privateRoute = () => {
-  const [auth, setAuth] = useState({});
+const privateRoute = ({children, rest}) => {
+  const [auth, setAuth] = useState(null);
   useEffect(() => {
  try {
   const decodedToken = jwtDecode(localStorage.getItem('token'));
