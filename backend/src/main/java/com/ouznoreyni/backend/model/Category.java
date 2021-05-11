@@ -1,6 +1,9 @@
 package com.ouznoreyni.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +16,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity(name = "category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category implements Serializable {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +40,9 @@ public class Category implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Transient
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Product> products;
 
 }

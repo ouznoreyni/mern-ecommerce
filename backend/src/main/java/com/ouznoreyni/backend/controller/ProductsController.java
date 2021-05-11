@@ -6,6 +6,7 @@ import com.ouznoreyni.backend.repository.CategoryRepository;
 import com.ouznoreyni.backend.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController()
 @RequestMapping("/api")
@@ -32,13 +30,22 @@ public class ProductsController {
     CategoryRepository categoryRepository;
 
     @GetMapping("products")
-    public List<Product> allProducts(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<?> allProducts(@RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "3") int size) {
         try {
+            List<Product> products = new ArrayList<Product>();
+
             Pageable pageable = PageRequest.of(page, size);
-            List<Product> products = productService.getAll(pageable).getContent();
-            System.out.println(products);
-            return products;
+            Page<Product> productsPage = productService.getAll(pageable);
+
+            Map<String, Object> response = new HashMap<>();
+            products=productsPage.getContent();
+            System.out.println(productsPage.getContent());
+            response.put("products", products );
+            response.put("currentPage", productsPage.getNumber());
+            response.put("totalItems", productsPage.getTotalElements());
+            response.put("totalPages", productsPage.getTotalPages());
+            return  new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "internal error happen", e);
         }

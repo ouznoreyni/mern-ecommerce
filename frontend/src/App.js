@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import Routes from './routes/index';
-import { useDispatch } from 'react-redux';
+import authService from './services/authService';
 import { setUser } from './store/authSlice';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-import authService from './services/authService';
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     const decodedToken = authService.decodedToken();
     dispatch(setUser(decodedToken));
@@ -22,5 +21,5 @@ function App() {
     </div>
   );
 }
-
+console.log();
 export default App;
