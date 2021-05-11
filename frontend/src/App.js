@@ -10,8 +10,13 @@ import { setUser } from './store/authSlice';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const decodedToken = authService.decodedToken();
+    try {
+      const decodedToken = authService.decodedToken();
     dispatch(setUser(decodedToken));
+    } catch (error) {
+      console.log(error);
+    }
+    
   }, []);
   return (
     <div className='mx-auto'>
