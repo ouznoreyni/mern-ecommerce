@@ -26,6 +26,9 @@ public class UserService {
     }
 
 
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
     public User save(User user) {
         user.setCreated(Instant.now());
         String passwordEncoded = securityConfig.passwordEncoder().encode(user.getPassword());
