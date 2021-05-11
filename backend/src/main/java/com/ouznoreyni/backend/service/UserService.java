@@ -1,10 +1,13 @@
 package com.ouznoreyni.backend.service;
 
 import com.ouznoreyni.backend.config.SecurityConfig;
+import com.ouznoreyni.backend.model.Product;
 import com.ouznoreyni.backend.model.User;
 import com.ouznoreyni.backend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -18,6 +21,11 @@ public class UserService {
     UserRepository userRepository;
     private SecurityConfig securityConfig;
 
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+
     public User save(User user) {
         user.setCreated(Instant.now());
         String passwordEncoded = securityConfig.passwordEncoder().encode(user.getPassword());
@@ -29,4 +37,6 @@ public class UserService {
         Optional<User> user = userRepository.findByUsernameOrEmail(username, email);
         return user;
     }
+
+
 }
