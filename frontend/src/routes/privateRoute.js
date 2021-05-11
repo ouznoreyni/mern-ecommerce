@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
-
-import { Route, Redirect } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import React, { useEffect, useState } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+
 
 const privateRoute = () => {
   const [auth, setAuth] = useState({});
   useEffect(() => {
-    const decodedToken = jwtDecode(localStorage.getItem('token'));
-    if (decodedToken._id) {
-      setAuth(true);
-    }
+ try {
+  const decodedToken = jwtDecode(localStorage.getItem('token'));
+  if (decodedToken._id) {
+    setAuth(true);
+  }
+ } catch (error) {
+   console.log(error);
+ }
   });
   return (
     <Route

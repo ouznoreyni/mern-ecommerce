@@ -1,17 +1,22 @@
-import React, { useState, useEffect, Component } from 'react';
-import { Redirect, Route } from 'react-router';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Redirect, Route } from 'react-router';
 
 const AdminRoute = ({ component: Component, render, ...rest }) => {
   const { currentUser } = useSelector((state) => state.auth);
   const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => {
-    if (currentUser && currentUser.role.authority == 'ROLE_ADMIN') {
-      setIsAdmin(true);
-    } else {
-      setIsAdmin(false);
+    try {
+      if (currentUser && currentUser.role.authority == 'ROLE_ADMIN') {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
+   
     return () => {};
   }, []);
   return (
