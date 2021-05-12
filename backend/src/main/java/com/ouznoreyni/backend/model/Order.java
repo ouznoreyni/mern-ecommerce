@@ -21,9 +21,9 @@ public class Order {
 
     private String code;
 
-    //@Transient
-    //@OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //private List<OrderItem> orderItems;
+    @Transient
+    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderItem> orderItems;
 
     @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=false)
