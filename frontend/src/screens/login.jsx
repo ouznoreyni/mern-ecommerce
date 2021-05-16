@@ -1,150 +1,161 @@
-import { Formik } from "formik";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import * as Yup from "yup";
-import Header from "../components/header/header";
-import authService from "../services/authService";
-import { loginUser } from "../store/authSlice";
+import { Formik } from 'formik';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import * as Yup from 'yup';
+import Header from '../components/header/header';
+import authService from '../services/authService';
+import { loginUser } from '../store/authSlice';
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Required").min(5).max(50),
-  password: Yup.string().required("Required").min(5).max(50),
+	username: Yup.string().required('Required').min(5).max(50),
+	password: Yup.string().required('Required').min(5).max(50),
 });
 
 const Login = (props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  // const authSelector = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-  useEffect(() => {
-    if (authService.getToken()) {
-      try {
-        const { role } = authService.decodedToken();
-        if (role.authority === "ROLE_ADMIN") {
-          history.push("/admin/dashboard");
-        }
-        if (role.authority === "ROLE_USER") {
-          history.push("/customer/dashboard");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  });
+	useEffect(() => {
+		if (authService.getToken()) {
+			try {
+				const { role } = authService.decodedToken();
+				if (role.authority === 'ROLE_ADMIN') {
+					history.push('/admin/dashboard');
+				}
+				if (role.authority === 'ROLE_USER') {
+					history.push('/customer/dashboard');
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	});
 
-  const onSubmit = async (credentials) => {
-    dispatch(loginUser(credentials));
-  };
+	const onSubmit = async (credentials) => {
+		dispatch(loginUser(credentials));
+	};
 
-  return (
-    <>
-      <Header />
-      <div className="flex items-center min-h-screen bg-white dark:bg-gray-900">
-        <div className="container mx-auto shadow-2xl">
-          <div className="max-w-md mx-auto my-10">
-            <div className="text-center">
-              <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
-                Se connecter
-              </h1>
-              <p className="text-gray-500 dark:text-gray-400">
-                Connecter-vous pour accéder à votre compte
-              </p>
-            </div>
-            <div className="m-7">
-              <Formik
-                initialValues={{ username: "", password: "" }}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-              >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-                  /* and other goodies */
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-6">
-                      <label
-                        htmlFor="username"
-                        className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                      >
-                        Nom d'utilisateur
-                      </label>
-                      <input
-                        value={values.username}
-                        type="text"
-                        name="username"
-                        id="username"
-                        onChange={handleChange}
-                        placeholder="ouznoreyni221"
-                        className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-400 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ${
-                          errors.username &&
-                          touched.username &&
-                          "border-red-500"
-                        }`}
-                      />
-                      {errors.username && touched.username && (
-                        <div className="text-red-500">{errors.username}</div>
-                      )}
-                    </div>
-                    <div className="mb-6">
-                      <div className="flex justify-between mb-2">
-                        <label
-                          htmlFor="password"
-                          className="text-sm text-gray-600 dark:text-gray-400"
-                        >
-                          Password
-                        </label>
-                      </div>
-                      <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        placeholder="votre Password"
-                        className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ${
-                          errors.password &&
-                          touched.password &&
-                          "border-red-500"
-                        }`}
-                      />
-                      {errors.password && touched.password && (
-                        <div className="text-red-600">{errors.password}</div>
-                      )}
-                    </div>
-                    <div className="mb-6">
-                      <button
-                        type="submit"
-                        className="w-full px-3 py-4 text-white bg-green-500 rounded-md focus:bg-green-600 focus:outline-none"
-                      >
-                        Connexion
-                      </button>
-                    </div>
-                    <p className="text-sm text-center text-gray-400">
-                      Vous n&#x27;avez pas encore un compte?{" "}
-                      <Link
-                        to="/register"
-                        className="text-blue-400 focus:outline-none focus:underline focus:text-blue-500 dark:focus:border-blue-800"
-                      >
-                        Inscrivez vous!
-                      </Link>
-                      .
-                    </p>
-                  </form>
-                )}
-              </Formik>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<div className='flex justify-center px-6 my-12 pt-10'>
+				{/* <!-- Row --> */}
+				<div className='w-full xl:w-3/4 lg:w-11/12 flex mt-20'>
+					{/* <!-- Col --> */}
+					<div className='w-full h-auto hidden lg:block lg:w-1/2 bg-cover rounded-l-lg'>
+						<img src='../../assets/img/secue_login.svg' alt='' />
+					</div>
+					{/* <!-- Col --> */}
+					<div className='w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none'>
+						<ToastContainer />
+						<h3 className='pt-4 text-2xl text-center'>Se connecter!</h3>
+						<Formik
+							initialValues={{ username: '', password: '' }}
+							validationSchema={validationSchema}
+							onSubmit={onSubmit}
+						>
+							{({
+								values,
+								errors,
+								touched,
+								handleChange,
+								handleBlur,
+								handleSubmit,
+								isSubmitting,
+								/* and other goodies */
+							}) => (
+								<form
+									className='px-8 pt-6 pb-8 mb-4 bg-white rounded'
+									onSubmit={handleSubmit}
+								>
+									<div className='mb-4'>
+										<label
+											className='block mb-2 text-sm font-bold text-gray-700'
+											htmlFor='username'
+										>
+											Nom d'utilisateur
+										</label>
+										<input
+											value={values.username}
+											type='text'
+											name='username'
+											id='username'
+											onChange={handleChange}
+											className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${
+												errors.username && touched.username && 'border-red-500'
+											}`}
+											placeholder='ouznoreyni'
+										/>
+										{errors.username && touched.username && (
+											<p className='text-xs italic text-red-500 mt-2'>
+												{errors.username}
+											</p>
+										)}
+									</div>
+									<div className='mb-4'>
+										<label
+											className='block mb-2 text-sm font-bold text-gray-700'
+											htmlFor='password'
+										>
+											Mot de passe
+										</label>
+										<input
+											name='password'
+											value={values.password}
+											onChange={handleChange}
+											className={`w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${
+												errors.password && touched.password && 'border-red-500'
+											}`}
+											id='password'
+											type='password'
+											placeholder='******************'
+										/>
+										{errors.password && touched.password && (
+											<p className='text-xs italic text-red-500 mt-2'>
+												{errors.password}
+											</p>
+										)}
+									</div>
+									<div className='mb-4'>
+										<input
+											className='mr-2 leading-tight'
+											type='checkbox'
+											id='checkbox_id'
+										/>
+										<label className='text-sm' htmlFor='checkbox_id'>
+											Se Souvenir
+										</label>
+									</div>
+									<div className='mb-6 text-center'>
+										<button
+											disabled={(touched && errors.password) || errors.password}
+											className='w-full px-4 py-3 font-bold text-white bg-green-500 rounded-full hover:bg-green-700 focus:outline-none focus:shadow-outline'
+											type='submit'
+										>
+											Se connecter
+										</button>
+									</div>
+									<hr className='mb-6 border-t' />
+									<div className='text-center'>
+										Vous n&#x27;avez pas encore un compte?{' '}
+										<Link
+											to='/register'
+											className='text-blue-700 focus:outline-none focus:underline focus:text-blue-500 dark:focus:border-blue-800'
+										>
+											Inscrivez vous!
+										</Link>
+										.
+									</div>
+								</form>
+							)}
+						</Formik>
+					</div>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default Login;
