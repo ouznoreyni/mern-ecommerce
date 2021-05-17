@@ -23,7 +23,7 @@ const TableBody = (props) => {
 	const { data, columns } = props;
 	console.log(data);
 	return (
-		<tbody>
+		<tbody className='p-2'>
 			{data.map((item) => (
 				<tr key={createKey(item)}>
 					{columns.map(
@@ -35,14 +35,14 @@ const TableBody = (props) => {
 									auth.getCurrentUser().isAdmin)) && (
 								<td
 									key={createKey(item, column)}
-									className='px-5 py-5 border-b border-gray-200 bg-white text-sm'
+									className='px-5 py-5 border-b border-gray-200 bg-white text-center text-sm'
 								>
 									{column.path !== 'image' ? (
 										renderCell(item, column)
 									) : (
-										<div className='flex-shrink-0 w-10 h-10'>
+										<div className='flex-shrink-0 w-10 h-10 float-right'>
 											<img
-												className='w-full h-full rounded-full'
+												className='w-full h-full rounded-full '
 												src={renderCell(item, column)}
 												alt='produit'
 											/>
