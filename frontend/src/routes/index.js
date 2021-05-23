@@ -44,12 +44,12 @@ const index = () => {
 			</Route>
 			<AdminRoute path='/admin/dashboard' component={Dashboard}></AdminRoute>
 			<AdminRoute
-				path='/admin/products'
-				component={ProductListAdmin}
-			></AdminRoute>
-			<AdminRoute
 				path='/admin/products/add'
 				component={ProductCreation}
+			></AdminRoute>
+			<AdminRoute
+				path='/admin/products'
+				component={ProductListAdmin}
 			></AdminRoute>
 			<AdminRoute
 				path='/admin/categories'
