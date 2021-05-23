@@ -30,7 +30,7 @@
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "react-scripts eject",
-		"all": "npm start & json-server --watch db.json --port 8000"
+		"dev": "npm start & json-server --watch db.json --port 8000"
 	},
 	"eslintConfig": {
 		"extends": [
