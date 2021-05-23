@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/adminLayout/AdminLayout';
-import Pagination from '../../../components/pagination';
+import Pagination from '../../../components/common/pagination';
 import ProductTable from '../../../components/ProductTable';
 import { products as data } from '../../../data.json';
 const ProductListAdmin = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/adminLayout/AdminLayout';
 import CategoryTable from '../../../components/CategoryTable';
-import Pagination from '../../../components/pagination';
+import Pagination from '../../../components/common/pagination';
 import { categories as data } from '../../../data.json';
 const CategoryListAdmin = () => {
 	const [categories, setcategories] = useState([]);

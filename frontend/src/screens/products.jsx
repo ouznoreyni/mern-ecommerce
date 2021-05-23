@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CardProduct from '../components/cardProduct';
+import Pagination from '../components/common/pagination';
 import Header from '../components/header/header';
 import MenuSideBar from '../components/menuSideBar';
-import Pagination from '../components/pagination';
 import productsService from '../services/productsService';
 import Footer from './footer';
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageSize, setPageSize] = useState(10);
+	const [itemsCount, setItemsCount] = useState(10);
 
-	const loadProducts = async () => {
-		const data = await productsService.getAll();
+	const loadProducts = async (currentPage) => {
+		const data = await productsService.getAll(currentPage);
 		setProducts(data.data);
+		setItemsCount(24);
 	};
 
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+		loadProducts(currentPage);
+	};
 	useEffect(() => {
 		loadProducts();
 	}, []);
@@ -84,7 +92,12 @@ const Products = () => {
 							<CardProduct key={p.id} product={p} />
 						))}
 					</div>
-					<Pagination />
+					<Pagination
+						currentPage={currentPage}
+						itemsCount={itemsCount}
+						pageSize={pageSize}
+						onPageChange={(page) => handlePageChange(page)}
+					/>
 				</div>
 				{/* end list products*/}
 			</div>
