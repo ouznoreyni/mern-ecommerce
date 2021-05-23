@@ -3,7 +3,6 @@ import React from 'react';
 
 const TableBody = (props) => {
 	const renderCell = (item, column) => {
-		console.log(item, column.path);
 		if (column.content !== undefined) {
 			return column.content(item);
 		} else {

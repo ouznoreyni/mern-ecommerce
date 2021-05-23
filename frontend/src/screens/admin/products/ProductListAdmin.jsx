@@ -2,17 +2,32 @@ import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/adminLayout/AdminLayout';
 import Pagination from '../../../components/common/pagination';
 import ProductTable from '../../../components/ProductTable';
-import { products as data } from '../../../data.json';
+import productsService from '../../../services/productsService';
+
 const ProductListAdmin = () => {
 	const [products, setProducts] = useState([]);
-	const [sortColumn] = useState({ path: 'title', order: 'asc' });
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageSize, setPageSize] = useState(10);
+	const [itemsCount, setItemsCount] = useState(10);
 
+	const loadProducts = async (currentPage) => {
+		const data = await productsService.getAll(currentPage);
+		setProducts(data.data);
+		setItemsCount(24);
+	};
+
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+		loadProducts(currentPage);
+	};
 	useEffect(() => {
-		setProducts(data);
-	}, [products]);
+		loadProducts();
+	}, []);
+	const [sortColumn] = useState({ path: 'title', order: 'asc' });
 
 	const handleDelete = () => {};
 	const handleSort = () => {};
+
 	return (
 		<AdminLayout>
 			<div className='py-8'>
@@ -26,7 +41,12 @@ const ProductListAdmin = () => {
 							onSort={handleSort}
 						/>
 						{/* tables products */}
-						<Pagination />
+						<Pagination
+							currentPage={currentPage}
+							itemsCount={itemsCount}
+							pageSize={pageSize}
+							onPageChange={(page) => handlePageChange(page)}
+						/>
 					</div>
 				</div>
 			</div>
