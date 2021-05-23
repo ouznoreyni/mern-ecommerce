@@ -3,59 +3,55 @@ package com.ouznoreyni.backend.controller;
 
 import com.ouznoreyni.backend.model.User;
 import com.ouznoreyni.backend.model.UserCredential;
+import com.ouznoreyni.backend.payload.request.RegisterRequest;
 import com.ouznoreyni.backend.security.JwtProvider;
 import com.ouznoreyni.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController()
-@RequestMapping("/api/auth")
+@RequestMapping(value = "/api/auth")
 @AllArgsConstructor
 public class authenticationController {
 
     private UserService userService;
-    @Autowired
+
+    PasswordEncoder passwordEncoder;
+
     private AuthenticationManager authenticationManager;
 
-    @Autowired
     private JwtProvider jwtProvider;
 
-    @Autowired
     private UserDetailsService userDetailsService;
 
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Validated @RequestBody User userData) throws Exception {
-        try {
-            Optional<?> user = userService.findByUsernameOrEmail(userData.getUsername(), userData.getEmail());
-            if (!user.isEmpty()) {
-                throw new Exception("Username or Email is already exist");
-            }
-
-        } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect Data", e);
-        }
-
-        User userRegistered = userService.save(userData);
-        Map<String, String> token = generateToken(userRegistered.getUsername());
-
-        return ResponseEntity.ok(token);
-
+    @PostMapping(value = "/register")
+    public ResponseEntity<?> register(@Valid @RequestBody  User userData, BindingResult bindingResult) {
+        System.out.println(userData);
+        return new ResponseEntity<>("hello", HttpStatus.CREATED);
     }
 
-    @PostMapping("/login")
+
+    @PostMapping(value = "/login")
     public ResponseEntity<?> login(@Validated @RequestBody UserCredential userCredential) throws Exception {
         try {
             authenticationManager.authenticate(
