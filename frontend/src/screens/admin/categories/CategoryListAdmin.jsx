@@ -3,6 +3,7 @@ import AdminLayout from '../../../components/admin/AdminLayout';
 import CategoryTable from '../../../components/CategoryTable';
 import Pagination from '../../../components/common/pagination';
 import { categories as data } from '../../../data.json';
+
 const CategoryListAdmin = () => {
 	const [categories, setcategories] = useState([]);
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
