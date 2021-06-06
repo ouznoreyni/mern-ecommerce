@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CardProduct from '../components/cardProduct';
 import Pagination from '../components/common/pagination';
-import Header from '../components/header/header';
+import MainLayout from '../components/layout/mainLayout';
 import MenuSideBar from '../components/menuSideBar';
 import productsService from '../services/productsService';
-import Footer from './footer';
 
 const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -27,8 +26,7 @@ const Products = () => {
 		loadProducts();
 	}, []);
 	return (
-		<>
-			<Header />
+		<MainLayout>
 			<h1 className='text-3xl'>Liste des produits</h1>
 			<div className='grid grid-cols-4 gap-4 mt-10'>
 				{/* menu of the sidebar */}
@@ -60,30 +58,6 @@ const Products = () => {
 								>
 									Popular
 								</Link>
-								{/* <a
-                  class="w-full px-4 py-2 text-left hover:bg-gray-200"
-                  href="#"
-                >
-                  Featured
-                </a>
-                <a
-                  class="w-full px-4 py-2 text-left hover:bg-gray-200"
-                  href="#"
-                >
-                  Newest
-                </a>
-                <a
-                  class="w-full px-4 py-2 text-left hover:bg-gray-200"
-                  href="#"
-                >
-                  Lowest Price
-                </a>
-                <a
-                  class="w-full px-4 py-2 text-left hover:bg-gray-200"
-                  href="#"
-                >
-                  Highest Price
-                </a> */}
 							</div>
 						</button>
 					</div>
@@ -101,8 +75,7 @@ const Products = () => {
 				</div>
 				{/* end list products*/}
 			</div>
-			<Footer />
-		</>
+		</MainLayout>
 	);
 };
 

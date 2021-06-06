@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
-import Header from '../components/header/header';
+import MainLayout from '../components/layout/mainLayout';
 import authService from '../services/authService';
 import { loginUser } from '../store/authSlice';
 
@@ -38,8 +38,7 @@ const Login = (props) => {
 	};
 
 	return (
-		<>
-			<Header />
+		<MainLayout>
 			<div className='flex justify-center px-6 my-12 pt-10'>
 				{/* <!-- Row --> */}
 				<div className='w-full xl:w-3/4 lg:w-11/12 flex mt-20'>
@@ -154,7 +153,7 @@ const Login = (props) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</MainLayout>
 	);
 };
 

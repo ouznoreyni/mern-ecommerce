@@ -1,11 +1,11 @@
 import React from 'react';
 import CartItem from '../components/cartItem';
-import Header from '../components/header/header';
+import MainLayout from '../components/layout/mainLayout';
 
 const Cart = () => {
 	return (
-		<>
-			<Header />
+		<MainLayout>
+			{' '}
 			<div class='container mx-auto mt-10'>
 				<div class='flex shadow-md my-10'>
 					<div class='w-3/4 bg-white px-10 py-10'>
@@ -89,7 +89,7 @@ const Cart = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</MainLayout>
 	);
 };
 

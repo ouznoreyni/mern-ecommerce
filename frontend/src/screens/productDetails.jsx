@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import Header from '../components/header/header';
+import MainLayout from '../components/layout/mainLayout';
 import productsService from '../services/productsService';
-import Footer from './footer';
 
 const ProductDetails = (props) => {
 	const [product, setProduct] = useState({});
@@ -22,8 +21,8 @@ const ProductDetails = (props) => {
 		getProduct(id);
 	}, [product, id, history]);
 	return (
-		<>
-			<Header />
+		<MainLayout>
+			{' '}
 			<div className='py-6'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<div className='flex items-center space-x-2 text-gray-400 text-sm'>
@@ -125,8 +124,7 @@ const ProductDetails = (props) => {
 					</div>
 				</div>
 			</div>
-			<Footer />
-		</>
+		</MainLayout>
 	);
 };
 

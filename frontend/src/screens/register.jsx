@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
-import Header from '../components/header/header';
+import MainLayout from '../components/layout/mainLayout';
 
 const validationSchema = Yup.object().shape({
 	firstName: Yup.string().required('Required').min(5).max(50),
@@ -33,8 +33,7 @@ const Register = () => {
 	};
 
 	return (
-		<>
-			<Header />
+		<MainLayout>
 			<div className='flex justify-center my-12 pt-10'>
 				{/* <!-- Row --> */}
 				<div className='w-full px-20 flex mt-20'>
@@ -258,7 +257,7 @@ const Register = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</MainLayout>
 	);
 };
 
