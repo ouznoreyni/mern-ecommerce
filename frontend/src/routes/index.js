@@ -8,6 +8,7 @@ import ErrorAdminPages from '../screens/admin/ErrorAdminPages';
 import OrderListAdmin from '../screens/admin/orders/OrderListAdmin';
 import ProductCreation from '../screens/admin/products/ProductCreation';
 import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
+import Cart from '../screens/cart';
 import Contact from '../screens/contact';
 import ErrorPage from '../screens/errorPage';
 import Home from '../screens/home';
@@ -38,6 +39,9 @@ const index = () => {
 			</Route>
 			<Route exact path='/contact'>
 				<Contact />
+			</Route>
+			<Route exact path='/cart'>
+				<Cart />
 			</Route>
 			<Route exact path='/'>
 				<Home />
