@@ -10,6 +10,7 @@ import ProductCreation from '../screens/admin/products/ProductCreation';
 import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
 import Cart from '../screens/cart';
 import Contact from '../screens/contact';
+import DashboardCustomer from '../screens/customer/DashboardCustomer';
 import ErrorPage from '../screens/errorPage';
 import Home from '../screens/home';
 import Login from '../screens/login';
@@ -17,6 +18,7 @@ import ProductDetails from '../screens/productDetails';
 import Products from '../screens/products';
 import Register from '../screens/register';
 import AdminRoute from './adminRoute';
+import PrivateRoute from './privateRoute';
 
 const index = () => {
 	return (
@@ -46,6 +48,7 @@ const index = () => {
 			<Route exact path='/'>
 				<Home />
 			</Route>
+			<PrivateRoute path='/customer' component={DashboardCustomer} />
 			<AdminRoute path='/admin/dashboard' component={Dashboard}></AdminRoute>
 			<AdminRoute
 				path='/admin/products/add'
@@ -66,6 +69,7 @@ const index = () => {
 			<AdminRoute path='/admin/orders' component={OrderListAdmin}></AdminRoute>
 
 			<AdminRoute path='/admin/*' component={ErrorAdminPages}></AdminRoute>
+
 			<Route path='*'>
 				<ErrorPage />
 			</Route>
