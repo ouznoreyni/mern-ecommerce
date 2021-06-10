@@ -19,7 +19,8 @@ const OrderTable = (props) => {
 		},
 		{ path: 'user.firstName', label: 'user' },
 		{ path: 'orderItems.length', label: 'products' },
-		{ path: 'created_at', label: 'fait' },
+		{ path: 'orderItems.length', label: 'Prix Total' },
+		{ path: 'created_at', label: 'Date' },
 	];
 
 	const addDeleteColumn = () => {

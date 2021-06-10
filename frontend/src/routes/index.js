@@ -11,6 +11,7 @@ import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
 import Cart from '../screens/cart';
 import Contact from '../screens/contact';
 import DashboardCustomer from '../screens/customer/DashboardCustomer';
+import Order from '../screens/customer/order';
 import ErrorPage from '../screens/errorPage';
 import Home from '../screens/home';
 import Login from '../screens/login';
@@ -48,7 +49,8 @@ const index = () => {
 			<Route exact path='/'>
 				<Home />
 			</Route>
-			<PrivateRoute path='/customer' component={DashboardCustomer} />
+			<PrivateRoute exact path='/customer/orders' component={Order} />
+			<PrivateRoute exact path='/customer' component={DashboardCustomer} />
 			<AdminRoute path='/admin/dashboard' component={Dashboard}></AdminRoute>
 			<AdminRoute
 				path='/admin/products/add'
