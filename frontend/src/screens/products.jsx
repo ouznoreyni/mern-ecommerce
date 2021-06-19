@@ -9,7 +9,7 @@ import productsService from '../services/productsService';
 const Products = () => {
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(10);
+	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
 	const loadProducts = async (currentPage) => {
@@ -28,15 +28,15 @@ const Products = () => {
 	return (
 		<MainLayout>
 			<h1 className='text-3xl'>Liste des produits</h1>
-			<div className='grid grid-cols-4 gap-4 mt-10'>
+			<div className='grid grid-cols-5 gap-5 mt-10'>
 				{/* menu of the sidebar */}
-				<div className='xl:col-span-1 lg:col-span-1  col-span-4'>
+				<div className='xl:col-span-1 lg:col-span-1  col-span-5 mt-9'>
 					<MenuSideBar />
 				</div>
 				{/* end menu of the sidebar */}
 				{/* list products*/}
 
-				<div className='2xl:col-span-3 xl:col-span-3 lg:col-span-3  col-span-4 '>
+				<div className='2xl:col-span-4 xl:col-span-4 lg:col-span-4  col-span-5 '>
 					<div className='pt-2 relative ml-7 inline-block mx-auto text-gray-600'>
 						<input
 							className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none'

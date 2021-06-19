@@ -232,14 +232,8 @@ const Register = () => {
 											className='w-full 2xl:w-1/2 xl:w-1/2 lg:w-1/2 px-4 py-3 font-bold text-white bg-green-500 rounded-full hover:bg-green-700 focus:outline-none focus:shadow-outline'
 											type='submit'
 										>
-											Se connecter
+											S'inscrire
 										</button>
-										{/* <button
-											className='w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline'
-											type='submit'
-										>
-											Enregister
-										</button> */}
 									</div>
 									<hr className='mb-6 border-t' />
 									<div className='text-center'>
