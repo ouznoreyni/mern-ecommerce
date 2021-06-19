@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import CardProduct from '../components/cardProduct';
 import Pagination from '../components/common/pagination';
 import MainLayout from '../components/layout/mainLayout';
@@ -16,6 +15,13 @@ const Products = () => {
 		const data = await productsService.getAll(currentPage);
 		setProducts(data.data);
 		setItemsCount(24);
+	};
+
+	const onFilter = ({ target }) => {
+		console.log('filter=>', target.name, '=>', target.value);
+	};
+	const onSearch = ({ target }) => {
+		console.log('search ', target.value);
 	};
 
 	const handlePageChange = (page) => {
@@ -43,23 +49,19 @@ const Products = () => {
 							type='search'
 							name='search'
 							placeholder='Search'
+							onChange={onSearch}
 						/>
 					</div>
 					<div className='inline-block float-right mr-5'>
-						<button className='relative text-sm focus:outline-none group mt-4 sm:mt-0'>
-							<div className='flex items-center justify-between w-40 h-10 px-3 border-2 border-gray-300 rounded hover:bg-gray-300'>
-								<span className='font-medium'>Popular</span>
-								<i className='fas fa-caret-down w-4 h-4'></i>
-							</div>
-							<div className='absolute z-10 flex-col items-start hidden w-full pb-1 bg-white shadow-lg rounded group-focus:flex'>
-								<Link
-									to='#'
-									className='w-full px-4 py-2 text-left hover:bg-gray-200'
-								>
-									Popular
-								</Link>
-							</div>
-						</button>
+						<select
+							className='block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+							onChange={onFilter}
+							name='filter'
+						>
+							<option value='recent'>Tri du plus récent au plus ancien</option>
+							<option value='desc'>Tri par tarif décroissant</option>
+							<option value='asc'>Tri par tarif croissant</option>
+						</select>
 					</div>
 					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6  p-8'>
 						{products.map((p) => (
