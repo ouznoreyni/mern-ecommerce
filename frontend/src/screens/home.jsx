@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CardProduct from '../components/cardProduct';
 import MainLayout from '../components/layout/mainLayout';
 import ProductCarousel from '../components/productCarousel';
@@ -6,6 +7,12 @@ import data from '../data.json';
 
 const Home = () => {
 	const [products] = useState(data.products.slice(0, 4));
+	const productState = useSelector((state) => state.entities.product.entities);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {};
+	}, []);
 
 	return (
 		<MainLayout>
