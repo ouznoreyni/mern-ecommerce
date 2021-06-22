@@ -28,6 +28,7 @@ const productSchema = mongoose.Schema(
       unique: true,
       required: true,
     },
+    image: { data: Buffer, contentType: String },
     price: {
       type: Number,
       required: true,

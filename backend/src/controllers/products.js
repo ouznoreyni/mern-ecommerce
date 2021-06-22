@@ -35,7 +35,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 })
 
 // @desc     Fetch single product
-// @route   GET /api/products/:_id
+// @route   GET /api/products/_id
 // @access  Public
 export const getProduct = asyncHandler(async (req, res) => {
   try {
@@ -63,13 +63,33 @@ export const createProduct = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: error.details[0].message })
     }
 
+    if (!req.file) {
+      return res.status(400).json({ message: 'add image please' })
+    }
+    const image = { contentType: req.file.mimetype, data: req.file.path }
     let product = await Product.create({
       user: req.user,
+      image,
       ...req.body,
     })
     product = await product.populate('category').execPopulate()
     return res.status(201).json({ product })
   } catch (error) {
     return res.status(500).json({ error: error.message })
+  }
+})
+
+// @desc    Delete a Product
+// @route   DELETE /api/products/_id
+// @access  Private/Admin
+export const deleteProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params)
+    if (!product) {
+      return res.status(404).json({ message: 'product does not exist' })
+    }
+    return res.status(204).json({ message: 'product deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Oup! something goes wrong' })
   }
 })
