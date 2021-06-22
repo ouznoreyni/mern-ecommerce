@@ -31,7 +31,8 @@
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "react-scripts eject",
-		"dev": "npm start & json-server db.json --port 8000 --routes routes.json"
+		"dev": "npm start & (cd ../backend && npm run dev)",
+		"mock": "npm start & json-server db.json --port 8001 --routes routes.json"
 	},
 	"eslintConfig": {
 		"extends": [
