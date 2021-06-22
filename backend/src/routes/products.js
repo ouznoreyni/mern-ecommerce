@@ -8,7 +8,7 @@ const {
   deleteProduct,
 } = require('../controllers/products')
 const router = express.Router()
-console.log(protect)
+
 router
   .route('/')
   .get(getProducts)
