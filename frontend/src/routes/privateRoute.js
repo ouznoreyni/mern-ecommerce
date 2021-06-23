@@ -14,7 +14,7 @@ const PrivateRoute = (props) => {
 		} catch (error) {
 			console.log(error);
 		}
-	});
+	}, []);
 	return (
 		<Route
 			{...rest}

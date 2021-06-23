@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CardProduct from '../components/cardProduct';
 import Pagination from '../components/common/pagination';
 import MainLayout from '../components/layout/mainLayout';
 import MenuSideBar from '../components/menuSideBar';
-import productsService from '../services/productsService';
+import { loadProducts } from '../store/productSlice';
 
 const Products = () => {
-	const [products, setProducts] = useState([]);
+	const products = useSelector((state) => state.entities.product.list.products);
+	const dispatch = useDispatch()
+	
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
-	const [itemsCount, setItemsCount] = useState(10);
-
-	const loadProducts = async (currentPage) => {
-		const data = await productsService.getAll(currentPage);
-		setProducts(data.data);
-		setItemsCount(24);
-	};
+	const [itemsCount, setItemsCount] = useState(10);;
 
 	const onFilter = ({ target }) => {
 		console.log('filter=>', target.name, '=>', target.value);
@@ -26,10 +23,10 @@ const Products = () => {
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
-		loadProducts(currentPage);
 	};
 	useEffect(() => {
-		loadProducts();
+		console.log("p ", products);
+		dispatch(loadProducts())
 	}, []);
 	return (
 		<MainLayout>

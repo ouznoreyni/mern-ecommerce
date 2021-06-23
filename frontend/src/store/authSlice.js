@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import jwtDecode from 'jwt-decode';
 import { default as auth } from '../services/authService';
 import notify from '../services/logService';
 
@@ -7,11 +8,10 @@ export const loginUser = createAsyncThunk(
 	async (credential, thunkAPI) => {
 		try {
 			const response = await auth.login(credential);
-			console.log('response ', response);
-			// if (response.data) {
-			// 	authService.saveToken(response.data.token);
-			// 	return jwtDecode(response.data.token);
-			// }
+			if (response.data) {
+				auth.saveToken(response.data.token)
+				return jwtDecode(response.data.token);
+			}
 		} catch (error) {
 			notify.error(error.message);
 			return thunkAPI.rejectWithValue(error.message);
@@ -23,39 +23,38 @@ const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
 		currentUser: {},
-		isFetching: false,
-		isSuccess: false,
-		isError: false,
-		errorMessage: '',
+		loading: false,
+		message: '',
 	},
 	reducers: {
 		setUser: (user, { payload }) => ({
 			currentUser: payload,
-			isFetching: false,
-			isSuccess: true,
-			isError: false,
-			errorMessage: '',
+			loading:false,
+			message:''
 		}),
 		logout: (state) => {
 			return state;
 		},
 	},
 	extraReducers: {
-		[loginUser.fulfilled]: (state, { payload }) => ({
+		[loginUser.pending]:(state, {payload})=>({
 			...state,
-			isFetching: false,
-			isSuccess: true,
-			isError: false,
-			errorMessage: '',
-			currentUser: payload,
+			loading:true
 		}),
-		[loginUser.rejected]: (state, { payload }) => ({
+		[loginUser.fulfilled]: (state, { payload }) =>(
+			{
+				loading:false,
+				message: '',
+				currentUser: payload,
+			}
+		),
+		[loginUser.rejected]: (state, { payload }) => {console.log("reject", payload); return{
 			...state,
 			isFetching: false,
 			isSuccess: false,
 			isError: true,
 			errorMessage: payload,
-		}),
+		}},
 	},
 });
 

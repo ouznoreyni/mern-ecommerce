@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import CardProduct from '../components/cardProduct';
 import MainLayout from '../components/layout/mainLayout';
 import ProductCarousel from '../components/productCarousel';
@@ -7,8 +6,8 @@ import data from '../data.json';
 
 const Home = () => {
 	const [products] = useState(data.products.slice(0, 4));
-	const productState = useSelector((state) => state.entities.product.entities);
-	const dispatch = useDispatch();
+	// const productState = useSelector((state) => state.entities.product.entities);
+	// const dispatch = useDispatch();
 
 	useEffect(() => {
 		return () => {};
@@ -49,7 +48,7 @@ const Home = () => {
 			<div className='flex content-center'>
 				<div className='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6 2xl:ml-24 p-8'>
 					{products.map((p) => (
-						<CardProduct key={p.id} product={p} />
+						<CardProduct key={p._id} product={p} />
 					))}
 				</div>
 			</div>

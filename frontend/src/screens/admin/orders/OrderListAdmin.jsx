@@ -7,7 +7,7 @@ import ordersService from '../../../services/orderService';
 const OrderListAdmin = () => {
 	const [orders, setOrders] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(10);
+	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
 	const loadOrders = async (currentPage) => {

@@ -8,7 +8,7 @@ import productsService from '../../../services/productsService';
 const ProductListAdmin = () => {
 	const [products, setProducts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(10);
+	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
 	const loadProducts = async (currentPage) => {

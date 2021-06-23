@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CardProduct = ({ product }) => {
+  console.log(product);
   return (
     <div>
       <Link
@@ -12,10 +13,11 @@ const CardProduct = ({ product }) => {
           backgroundSize: 'cover',
         }}
       ></Link>
+    
       <div className='flex items-center justify-between mt-3'>
         <div>
-          <Link to={`/products/${product.id}`} className='font-medium'>
-            {product.name}
+          <Link to={`/products/${product._id}`} className='font-medium'>
+            {product.title}
           </Link>
           <Link className='flex items-center' to='#'>
             <span className='text-xs font-medium text-gray-600'>by</span>

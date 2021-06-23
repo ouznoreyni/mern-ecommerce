@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Brand = () => {
-	const state = useSelector((state) => state.entities.auth);
-	const [currentUser, setCurrentUser] = useState({});
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 
-	useEffect(() => {
-		setCurrentUser(state.currentUser);
-	}, [state.currentUser]);
+	useEffect(() => {}, [currentUser]);
+
 	return (
 		<nav className='flex justify-between w-full topHeader text-white p-4'>
 			<a href='/'>
@@ -40,13 +38,17 @@ const Brand = () => {
         </div> */}
 
 				<div className='flex text-sm'>
-					{currentUser.sub ? (
-						<Link
+					{currentUser? (
+					<>	<button
 							className='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-							to='/admin/dashboard'
 						>
-							{currentUser.sub}
-						</Link>
+							{currentUser.firstName}
+						</button>
+						<div className="block absolute mt-8 w-full hidden bg-red-500">
+							<h2>Button</h2>
+					<h2>Button</h2>
+					<h2>Button</h2></div>
+						</>
 					) : (
 						<>
 							<Link

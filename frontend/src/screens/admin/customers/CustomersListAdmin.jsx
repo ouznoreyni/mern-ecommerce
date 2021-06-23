@@ -7,7 +7,7 @@ import usersService from '../../../services/usersService';
 const CustomersListAdmin = () => {
 	const [users, setUsers] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(10);
+	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
 	const loadUsers = async (currentPage) => {

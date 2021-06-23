@@ -1,15 +1,14 @@
 import jwtDecode from 'jwt-decode';
 import http from './httpService';
 
-
 const TOKEN = 'token';
 const headers = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+	'Access-Control-Allow-Origin': '*',
+	'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
 };
 
 const login = async (credential) =>
-  await http.post('/auth/login', credential, headers);
+	await http.post('/login', credential, headers);
 
 const register = async (data) => {};
 
@@ -18,13 +17,13 @@ const getToken = () => localStorage.getItem(TOKEN);
 const removeToken = () => localStorage.removeItem(TOKEN);
 const decodedToken = () => jwtDecode(getToken());
 
-const authService={
-  login,
-  register,
-  saveToken,
-  getToken,
-  removeToken,
-  decodedToken,
+const authService = {
+	login,
+	register,
+	saveToken,
+	getToken,
+	removeToken,
+	decodedToken,
 };
 
-export default  authService;
+export default authService;

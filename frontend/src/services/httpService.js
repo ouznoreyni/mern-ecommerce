@@ -1,17 +1,17 @@
 import axios from 'axios';
 const instance = axios.create({
-	baseURL: process.env.REACT_APP_API_URL_MOCK,
+	baseURL: process.env.REACT_APP_API_URL,
 	timeout: 1000,
 });
 
 // Add a response interceptor
 instance.interceptors.response.use(null, (error) => {
 	if (error.response) {
-		console.log(error.response.data);
+		console.error(error.response.data);
 	} else {
-		console.log(error.message);
+		console.error(error.message);
 	}
-	return Promise.reject(error);
+	return Promise.reject(error.response.data);
 });
 
 function setJWT(jwt) {

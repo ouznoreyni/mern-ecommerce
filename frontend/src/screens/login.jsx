@@ -1,37 +1,35 @@
 import { Formik } from 'formik';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
 import MainLayout from '../components/layout/mainLayout';
-import authService from '../services/authService';
 import { loginUser } from '../store/authSlice';
 
 const validationSchema = Yup.object().shape({
-	username: Yup.string().required('Required').min(5).max(50),
+	email: Yup.string().email().required(),
 	password: Yup.string().required('Required').min(5).max(50),
 });
 
 const Login = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 
 	useEffect(() => {
-		if (authService.getToken()) {
+		if (currentUser && currentUser._id) {
 			try {
-				const { role } = authService.decodedToken();
-				if (role.authority === 'ROLE_ADMIN') {
+				if (currentUser.isAdmin) {
 					history.push('/admin/dashboard');
-				}
-				if (role.authority === 'ROLE_USER') {
-					history.push('/customer/dashboard');
+				} else {
+					history.push('/customer');
 				}
 			} catch (error) {
 				console.log(error);
 			}
 		}
-	});
+	},[currentUser, history]);
 
 	const onSubmit = async (credentials) => {
 		dispatch(loginUser(credentials));
@@ -51,7 +49,7 @@ const Login = (props) => {
 						<ToastContainer />
 						<h3 className='pt-4 text-2xl text-center'>Se connecter!</h3>
 						<Formik
-							initialValues={{ username: '', password: '' }}
+							initialValues={{ email: '', password: '' }}
 							validationSchema={validationSchema}
 							onSubmit={onSubmit}
 						>
@@ -72,24 +70,24 @@ const Login = (props) => {
 									<div className='mb-4'>
 										<label
 											className='block mb-2 text-sm font-bold text-gray-700'
-											htmlFor='username'
+											htmlFor='email'
 										>
-											Nom d'utilisateur
+											Email
 										</label>
 										<input
-											value={values.username}
+											value={values.email}
 											type='text'
-											name='username'
-											id='username'
+											name='email'
+											id='email'
 											onChange={handleChange}
 											className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${
-												errors.username && touched.username && 'border-red-500'
+												errors.email && touched.email && 'border-red-500'
 											}`}
-											placeholder='ouznoreyni'
+											placeholder='ouznoreyni@gmail.com'
 										/>
-										{errors.username && touched.username && (
+										{errors.email && touched.email && (
 											<p className='text-xs italic text-red-500 mt-2'>
-												{errors.username}
+												{errors.email}
 											</p>
 										)}
 									</div>
