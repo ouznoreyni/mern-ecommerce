@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../store/authSlice';
 
 const Brand = () => {
 	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 
 	useEffect(() => {}, [currentUser]);
+	const dispatch = useDispatch();
+
+	const handleLogout = () => dispatch(logout());
 
 	return (
 		<nav className='flex justify-between w-full topHeader text-white p-4'>
@@ -38,8 +42,9 @@ const Brand = () => {
         </div> */}
 
 				<div className='flex text-sm'>
-					{currentUser? (
-					<>	<button
+					{currentUser && currentUser._id ? (
+						<>
+							{/* <button
 							className='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
 						>
 							{currentUser.firstName}
@@ -47,7 +52,28 @@ const Brand = () => {
 						<div className="block absolute mt-8 w-full hidden bg-red-500">
 							<h2>Button</h2>
 					<h2>Button</h2>
-					<h2>Button</h2></div>
+					<h2>Button</h2></div> */}
+
+							<div className='dropdown inline-block relative'>
+								<button className='bg-white text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center'>
+									<span class='mr-1'>{currentUser.firstName}</span>
+								</button>
+								<ul className='dropdown-menu hidden absolute w-full topHeader  text-gray-700 pt-2 '>
+									<li className='topHeader'>
+										<Link className='text-white font-semibold  py-2 px-1 rounded'>
+											Compte
+										</Link>
+									</li>
+									<li className='topHeader'>
+										<button
+											onClick={handleLogout}
+											className='text-white font-semibold py-2 px-1 rounded'
+										>
+											deconnexion
+										</button>
+									</li>
+								</ul>
+							</div>
 						</>
 					) : (
 						<>

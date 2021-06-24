@@ -1,10 +1,13 @@
 .topHeader {
-  background-color: #05344a;
+	background-color: #05344a;
 }
 
 .group:focus .group-focus\:flex {
-  display: flex;
+	display: flex;
 }
 .hero {
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+.dropdown:hover .dropdown-menu {
+	display: block;
 }

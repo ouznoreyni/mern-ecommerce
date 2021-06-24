@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
-import { default as auth } from '../services/authService';
+import authService, { default as auth } from '../services/authService';
 import notify from '../services/logService';
 
 export const loginUser = createAsyncThunk(
@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk(
 		try {
 			const response = await auth.login(credential);
 			if (response.data) {
-				auth.saveToken(response.data.token)
+				auth.saveToken(response.data.token);
 				return jwtDecode(response.data.token);
 			}
 		} catch (error) {
@@ -29,36 +29,42 @@ const authSlice = createSlice({
 	reducers: {
 		setUser: (user, { payload }) => ({
 			currentUser: payload,
-			loading:false,
-			message:''
+			loading: false,
+			message: '',
 		}),
-		logout: (state) => {
-			return state;
+		logout: (state, action) => {
+			authService.removeToken();
+			return {
+				currentUser: {},
+				loading: false,
+				message: '',
+			};
 		},
 	},
 	extraReducers: {
-		[loginUser.pending]:(state, {payload})=>({
+		[loginUser.pending]: (state, { payload }) => ({
 			...state,
-			loading:true
+			loading: true,
 		}),
-		[loginUser.fulfilled]: (state, { payload }) =>(
-			{
-				loading:false,
-				message: '',
-				currentUser: payload,
-			}
-		),
-		[loginUser.rejected]: (state, { payload }) => {console.log("reject", payload); return{
-			...state,
-			isFetching: false,
-			isSuccess: false,
-			isError: true,
-			errorMessage: payload,
-		}},
+		[loginUser.fulfilled]: (state, { payload }) => ({
+			loading: false,
+			message: '',
+			currentUser: payload,
+		}),
+		[loginUser.rejected]: (state, { payload }) => {
+			console.log('reject', payload);
+			return {
+				...state,
+				isFetching: false,
+				isSuccess: false,
+				isError: true,
+				errorMessage: payload,
+			};
+		},
 	},
 });
 
-export const { loadAuthenticatedUser, currentUser, setUser } =
+export const { loadAuthenticatedUser, currentUser, setUser, logout } =
 	authSlice.actions;
 
 export default authSlice;

@@ -1,31 +1,26 @@
-import jwtDecode from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = (props) => {
 	const { component: Component, render, ...rest } = props;
-	const [auth, setAuth] = useState(true);
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
+
 	useEffect(() => {
-		try {
-			const decodedToken = jwtDecode(localStorage.getItem('token'));
-			if (decodedToken._id) {
-				setAuth(true);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	}, []);
+		console.log(currentUser);
+	}, [currentUser]);
+
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				if (!auth)
+				if (!currentUser || !currentUser._id)
 					return (
 						<Redirect
 							to={{
 								pathname: '/login',
 								state: {
-									from: this.props.location,
+									from: props.location,
 								},
 							}}
 						/>
