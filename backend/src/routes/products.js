@@ -6,8 +6,11 @@ const {
   getProduct,
   createProduct,
   deleteProduct,
+  getTopProducts,
 } = require('../controllers/products')
 const router = express.Router()
+
+router.get('/top', getTopProducts)
 
 router
   .route('/')

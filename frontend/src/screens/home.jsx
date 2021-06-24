@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import CardProduct from '../components/cardProduct';
 import MainLayout from '../components/layout/mainLayout';
+import MultiplePoductsSlide from '../components/multiplePoductsSlide';
 import ProductCarousel from '../components/productCarousel';
 import data from '../data.json';
 
 const Home = () => {
 	const [products] = useState(data.products.slice(0, 4));
+	const [productsTOp] = useState(data.products.slice(0, 8));
 	// const productState = useSelector((state) => state.entities.product.entities);
 	// const dispatch = useDispatch();
 
@@ -45,11 +47,18 @@ const Home = () => {
 			</div>
 			{/* info and satisfaction */}
 			{/* lastest and top products */}
-			<div className='flex content-center'>
-				<div className='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6 2xl:ml-24 p-8'>
-					{products.map((p) => (
-						<CardProduct key={p._id} product={p} />
-					))}
+			<div className='mt-5'>
+				<h2 className='w-full text-center'>Dernières nouveautés</h2>
+				<div className='flex content-center'>
+					<div className='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
+						{products.map((p) => (
+							<CardProduct key={p._id} product={p} />
+						))}
+					</div>
+				</div>
+				<h2 className='w-full text-center mt-4'>Les plus demandés</h2>
+				<div className='mx-5'>
+					<MultiplePoductsSlide products={productsTOp} />
 				</div>
 			</div>
 			{/* end lastest and top products */}

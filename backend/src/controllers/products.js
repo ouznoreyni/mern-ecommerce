@@ -93,3 +93,15 @@ export const deleteProduct = asyncHandler(async (req, res) => {
     return res.status(500).json({ message: 'Oup! something goes wrong' })
   }
 })
+
+// @desc    Get top rated products
+// @route   GET /api/products/top
+// @access  Public
+export const getTopProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({}).sort({ rating: -1 }).limit(8)
+    res.json({ products })
+  } catch (error) {
+    return res.status(500).json({ message: 'Oup! something goes wrong' })
+  }
+})
