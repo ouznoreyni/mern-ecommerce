@@ -7,12 +7,13 @@ import MenuSideBar from '../components/menuSideBar';
 import { loadProducts } from '../store/productSlice';
 
 const Products = () => {
-	const products = useSelector((state) => state.entities.product.list.products);
-	const dispatch = useDispatch()
-	
+	const productsSelector = useSelector((state) => state.entities.product);
+	const dispatch = useDispatch();
+	const [state, setstate] = useState([]);
+
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
-	const [itemsCount, setItemsCount] = useState(10);;
+	const [itemsCount, setItemsCount] = useState(10);
 
 	const onFilter = ({ target }) => {
 		console.log('filter=>', target.name, '=>', target.value);
@@ -25,9 +26,23 @@ const Products = () => {
 		setCurrentPage(page);
 	};
 	useEffect(() => {
-		console.log("p ", products);
-		dispatch(loadProducts())
-	}, []);
+		console.log('*********************');
+		dispatch(loadProducts());
+		setstate(productsSelector.list.products);
+		const { params } = productsSelector.list;
+		if (params) {
+			console.log('params existe');
+		}
+		// setCurrentPage(params.page);
+		// setItemsCount(params.totalProducts);
+		console.log('params ', params);
+		console.log('product ', productsSelector);
+		console.log('********************* end');
+		return () => {
+			console.log('clean');
+		};
+	}, [dispatch, productsSelector]);
+
 	return (
 		<MainLayout>
 			<h1 className='text-3xl'>Liste des produits</h1>
@@ -61,8 +76,8 @@ const Products = () => {
 						</select>
 					</div>
 					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6  p-8'>
-						{products.map((p) => (
-							<CardProduct key={p.id} product={p} />
+						{productsSelector.list.products.map((p) => (
+							<CardProduct key={p._id} product={p} />
 						))}
 					</div>
 					<Pagination
