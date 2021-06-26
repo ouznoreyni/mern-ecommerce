@@ -3,27 +3,19 @@ import { Link } from 'react-router-dom';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import Pagination from '../../../components/common/pagination';
 import ProductTable from '../../../components/ProductTable';
-import productsService from '../../../services/productsService';
+import useProducts from '../../../hooks/useProducts';
 
 const ProductListAdmin = () => {
-	const [products, setProducts] = useState([]);
+	const productsSelector = useProducts();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
-	const loadProducts = async (currentPage) => {
-		const data = await productsService.getAll(currentPage);
-		setProducts(data.data);
-		setItemsCount(24);
-	};
-
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
-		loadProducts(currentPage);
 	};
-	useEffect(() => {
-		loadProducts();
-	}, []);
+
+	useEffect(() => {}, []);
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
 
 	const handleDelete = () => {};
@@ -43,7 +35,7 @@ const ProductListAdmin = () => {
 						{/* tables products */}
 						<ProductTable
 							sortColumn={sortColumn}
-							products={products}
+							products={productsSelector.list.products}
 							onDelete={handleDelete}
 							onSort={handleSort}
 						/>

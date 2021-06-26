@@ -24,6 +24,7 @@ const productSlice = createSlice({
 		productsReceived: (state, action) => {
 			state.list = action.payload;
 			state.loading = false;
+			state.lastFetch = Date.now();
 		},
 		productAdded: (state, action) => {
 			state.list.products.push(action.payload);
@@ -37,6 +38,9 @@ const productSlice = createSlice({
 				return products.filter((p) => p._id !== _id);
 			}
 		},
+		productSearch: (state, action) => {
+			state.list.products = action.payload;
+		},
 	},
 });
 
@@ -46,9 +50,11 @@ const {
 	productsRequestFailed,
 	productAdded,
 	productDeleted,
+	productSearch,
 } = productSlice.actions;
 
-//Action Creators
+/*Action Creators*/
+
 export const loadProducts = (page = 1) =>
 	apiCallBegan({
 		url: `${url}?_page${page}&_limit=10`,
@@ -56,6 +62,23 @@ export const loadProducts = (page = 1) =>
 		onSucces: productsReceived.type,
 		onError: productsRequestFailed.type,
 	});
+
+//caching
+// export const loadProducts =
+// 	(page = 1) =>
+// 	(dispatch, getState) => {
+// 		const { lastFetch } = getState.entities.products;
+// 		const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
+// 		if (diffInMinutes < 10) return;
+// 		dispatch(
+// 			apiCallBegan({
+// 				url: `${url}?_page${page}&_limit=10`,
+// 				onStart: productsRequested.type,
+// 				onSucces: productsReceived.type,
+// 				onError: productsRequestFailed.type,
+// 			})
+// 		);
+// 	};
 
 export const addProduct = (product) =>
 	apiCallBegan({
@@ -78,6 +101,13 @@ export const deleteProduct = (product) =>
 		url: `${url}/${product._id}`,
 		method: 'delete',
 		onSucces: productDeleted.type,
+	});
+
+export const searchProduct = (title) =>
+	apiCallBegan({
+		url: `${url}?title=${title}`,
+		method: 'get',
+		onSucces: productSearch.type,
 	});
 
 export default productSlice;

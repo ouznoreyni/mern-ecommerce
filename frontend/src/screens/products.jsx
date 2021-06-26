@@ -4,13 +4,12 @@ import CardProduct from '../components/cardProduct';
 import Pagination from '../components/common/pagination';
 import MainLayout from '../components/layout/mainLayout';
 import MenuSideBar from '../components/menuSideBar';
-import { loadProducts } from '../store/productSlice';
+import { loadProducts, searchProduct } from '../store/productSlice';
 
 const Products = () => {
 	const productsSelector = useSelector((state) => state.entities.product);
 	const dispatch = useDispatch();
-	const [state, setstate] = useState([]);
-
+	const [isMounted, setisMounted] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
@@ -20,28 +19,30 @@ const Products = () => {
 	};
 	const onSearch = ({ target }) => {
 		console.log('search ', target.value);
+		dispatch(searchProduct(target.value));
+		console.log('search ==>', productsSelector);
 	};
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
 	};
 	useEffect(() => {
-		console.log('*********************');
 		dispatch(loadProducts());
-		setstate(productsSelector.list.products);
-		const { params } = productsSelector.list;
-		if (params) {
-			console.log('params existe');
-		}
-		// setCurrentPage(params.page);
-		// setItemsCount(params.totalProducts);
-		console.log('params ', params);
-		console.log('product ', productsSelector);
-		console.log('********************* end');
+		console.log('dis ', productsSelector.list);
+		// if (!isMounted) {
+		// 	const { params } = productsSelector.list;
+
+		// 	// setCurrentPage(params.page);
+		// 	// setItemsCount(params.totalProducts);
+		// 	// console.log('params ', params);
+		// 	//	console.log('product ', productsSelector);
+		// 	// console.log('********************* end');
+		// }
+
 		return () => {
-			console.log('clean');
+			setisMounted(true);
 		};
-	}, [dispatch, productsSelector]);
+	}, []);
 
 	return (
 		<MainLayout>

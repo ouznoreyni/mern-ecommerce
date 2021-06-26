@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Table from './common/Table';
 
 const ProductTable = (props) => {
-	const auth = {};
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 	useEffect(() => {
 		try {
-			const user = auth.getCurrentUser();
-			if (user && user.isAdmin) columns.push(addDeleteColumn());
+			if (currentUser && currentUser.isAdmin) columns.push(addDeleteColumn());
 		} catch (error) {
 			console.log(error);
 		}
@@ -17,11 +17,11 @@ const ProductTable = (props) => {
 			path: 'image',
 			label: 'image',
 		},
-		{ path: 'name', label: 'name' },
-		{ path: 'count_in_stock', label: 'Stock' },
+		{ path: 'title', label: 'title' },
+		{ path: 'countInStock', label: 'Stock' },
 		{ path: 'price', label: 'prix' },
-		{ path: 'category_id.name', label: 'categorie' },
-		{ path: 'created_at', label: 'ajouté' },
+		{ path: 'category', label: 'categorie' },
+		{ path: 'createdAt', label: 'ajouté' },
 	];
 
 	const addDeleteColumn = () => {

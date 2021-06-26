@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Table from './common/Table';
 
 const UserTable = (props) => {
-	const auth = {};
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 	useEffect(() => {
 		try {
-			const user = auth.getCurrentUser();
-			if (user && user.isAdmin) columns.push(addDeleteColumn());
+			if (currentUser && currentUser.isAdmin) columns.push(addDeleteColumn());
 		} catch (error) {
 			console.log(error);
 		}
@@ -18,7 +18,7 @@ const UserTable = (props) => {
 			label: 'prenom',
 		},
 		{ path: 'last_name', label: 'nom' },
-		{ path: 'username', label: 'nom utilisateur' },
+		{ path: 'currentUsername', label: 'nom utilisateur' },
 		{ path: 'email', label: 'email' },
 		{ path: 'isAdmin', label: 'admin' },
 	];

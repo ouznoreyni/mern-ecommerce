@@ -2,27 +2,20 @@ import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import Pagination from '../../../components/common/pagination';
 import UserTable from '../../../components/UserTable';
-import usersService from '../../../services/usersService';
+import useUsers from '../../../hooks/useUsers';
 
 const CustomersListAdmin = () => {
-	const [users, setUsers] = useState([]);
+	const userSelector = useUsers();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
 
-	const loadUsers = async (currentPage) => {
-		const data = await usersService.getAll(currentPage);
-		setUsers(data.data);
-		console.log(data);
-		setItemsCount(24);
-	};
-
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
-		loadUsers(currentPage);
 	};
 	useEffect(() => {
-		loadUsers();
+		console.log('user=>', userSelector);
+		// loadUsers();
 	}, []);
 
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
@@ -38,7 +31,7 @@ const CustomersListAdmin = () => {
 						{/* tables orders */}
 						<UserTable
 							sortColumn={sortColumn}
-							users={users}
+							users={userSelector.list.users}
 							onDelete={handleDelete}
 							onSort={handleSort}
 						/>

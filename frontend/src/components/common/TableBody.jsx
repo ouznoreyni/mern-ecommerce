@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const TableBody = (props) => {
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 	const renderCell = (item, column) => {
 		if (column.content !== undefined) {
 			return column.content(item);
@@ -18,7 +20,6 @@ const TableBody = (props) => {
 		}
 	};
 
-	const auth = {};
 	const { data, columns } = props;
 	console.log(data);
 	return (
@@ -28,10 +29,8 @@ const TableBody = (props) => {
 					{columns.map(
 						(column) =>
 							((!column.login && !column.admin) ||
-								(column.login && auth.getCurrentUser()) ||
-								(column.admin &&
-									auth.getCurrentUser() &&
-									auth.getCurrentUser().isAdmin)) && (
+								(column.login && currentUser) ||
+								(column.admin && currentUser && currentUser.isAdmin)) && (
 								<td
 									key={createKey(item, column)}
 									className='px-5 py-5 border-b border-gray-200 bg-white text-center text-sm'
