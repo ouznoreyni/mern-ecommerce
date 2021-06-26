@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/admin/AdminLayout';
-import CategoryTable from '../../../components/CategoryTable';
-import Pagination from '../../../components/common/pagination';
+import CategoryTable from '../../../components/tables/CategoryTable';
+import Pagination from '../../../components/common/Pagination';
 import { categories as data } from '../../../data.json';
 
 const CategoryListAdmin = () => {

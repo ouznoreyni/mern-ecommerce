@@ -1,3 +1,6 @@
-# ecommerce
+# `e-commerce app`
 
-spring boot and react
+#### React
+#### Node js
+#### Mongo db
+

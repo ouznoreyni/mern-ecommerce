@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import Pagination from '../../../components/common/Pagination';
-import ProductTable from '../../../components/tables/ProductTable';
-import useProducts from '../../../hooks/useProducts';
+import UserTable from '../../../components/tables/UserTable';
+import useUsers from '../../../hooks/useUsers';
 
-const ProductListAdmin = () => {
-	const productsSelector = useProducts();
+const UsersListAdmin = () => {
+	const userSelector = useUsers();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
 	const [itemsCount, setItemsCount] = useState(10);
@@ -14,8 +13,11 @@ const ProductListAdmin = () => {
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
 	};
+	useEffect(() => {
+		console.log('user=>', userSelector);
+		// loadUsers();
+	}, []);
 
-	useEffect(() => {}, []);
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
 
 	const handleDelete = () => {};
@@ -25,21 +27,15 @@ const ProductListAdmin = () => {
 		<AdminLayout>
 			<div className='py-8'>
 				<div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
-					<Link
-						class='float-right text-center rounded-r-lg bg-gray-600  text-white font-bold p-4 md:w-3/12 w-1/2 uppercase border-gray-600 border-t border-b border-r mb-2'
-						to='/admin/products/add'
-					>
-						ajouter
-					</Link>
-					<div className='inline-block min-w-full shadow-2xl rounded-lg overflow-hidden'>
-						{/* tables products */}
-						<ProductTable
+					<div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
+						{/* tables orders */}
+						<UserTable
 							sortColumn={sortColumn}
-							products={productsSelector.list.products}
+							users={userSelector.list.users}
 							onDelete={handleDelete}
 							onSort={handleSort}
 						/>
-						{/* tables products */}
+						{/* tables orders */}
 						<Pagination
 							currentPage={currentPage}
 							itemsCount={itemsCount}
@@ -53,4 +49,4 @@ const ProductListAdmin = () => {
 	);
 };
 
-export default ProductListAdmin;
+export default UsersListAdmin;

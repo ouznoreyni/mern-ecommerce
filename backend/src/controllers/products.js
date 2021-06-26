@@ -10,17 +10,16 @@ export const getProducts = asyncHandler(async (req, res) => {
   const page = Number(req.query.page) || 1
   const skip = pageSize * (page - 1)
 
-  const keyword = req.query.keyword
+  const title = req.query.title
     ? {
-        name: {
-          $regex: req.query.keyword,
+        title: {
+          $regex: req.query.title,
           $options: 'i',
         },
       }
     : {}
-
-  const count = await Product.countDocuments({ ...keyword })
-  const products = await Product.find({ ...keyword })
+  const count = await Product.countDocuments({ ...title })
+  const products = await Product.find({ ...title })
     .limit(pageSize)
     .skip(skip)
 

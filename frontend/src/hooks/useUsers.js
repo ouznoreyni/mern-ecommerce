@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUsers } from '../store/userSlice';
+import { loadUsers } from '../store/UserSlice';
 
 const useUsers = () => {
 	const usersSelector = useSelector((state) => state.entities.user);

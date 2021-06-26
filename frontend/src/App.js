@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import Loading from './components/loading/loading';
-import Routes from './routes/index';
-import authService from './services/authService';
-import { setUser } from './store/authSlice';
+import Loading from './components/loading/Loading';
+import Routes from './routes/Index';
+import authService from './services/AuthService';
+import { setUser } from './store/AuthSlice';
 
 function App() {
 	const dispatch = useDispatch();

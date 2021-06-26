@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import AdminLayout from '../../../components/admin/AdminLayout';
-import Pagination from '../../../components/common/Pagination';
-import OrderTable from '../../../components/tables/OrderTable';
-import ordersService from '../../../services/OrderService';
+import Pagination from '../../components/common/Pagination';
+import MainLayout from '../../components/layout/MainLayout';
+import OrderTable from '../../components/tables/OrderTable';
+import ordersService from '../../services/OrderService';
 
-const OrderListAdmin = () => {
+const Order = () => {
 	const [orders, setOrders] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
@@ -31,8 +31,9 @@ const OrderListAdmin = () => {
 	const handleSort = () => {};
 
 	return (
-		<AdminLayout>
+		<MainLayout>
 			<div className='py-8'>
+				<h2>Mes commandes</h2>
 				<div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
 					<div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
 						{/* tables orders */}
@@ -52,8 +53,8 @@ const OrderListAdmin = () => {
 					</div>
 				</div>
 			</div>
-		</AdminLayout>
+		</MainLayout>
 	);
 };
 
-export default OrderListAdmin;
+export default Order;
