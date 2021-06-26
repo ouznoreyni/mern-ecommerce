@@ -90,3 +90,5 @@ logfile.log
 
 /src/config/development.json
 uploads
+
+.idea
