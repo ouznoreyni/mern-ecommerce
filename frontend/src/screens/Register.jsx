@@ -1,15 +1,16 @@
 import { Formik } from 'formik';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
 import MainLayout from '../components/layout/MainLayout';
+import { registerUser } from '../store/AuthSlice';
 
 const validationSchema = Yup.object().shape({
 	firstName: Yup.string().required('Required').min(5).max(50),
 	lastName: Yup.string().required('Required').min(5).max(50),
 	email: Yup.string().email().required('Required').min(5).max(50),
-	username: Yup.string().required('Required').min(5).max(50),
 	password: Yup.string().required('Required').min(5).max(50),
 	repeat_password: Yup.string().oneOf(
 		[Yup.ref('password'), null],
@@ -20,14 +21,31 @@ const validationSchema = Yup.object().shape({
 const initialValues = {
 	firstName: '',
 	lastName: '',
-	username: '',
 	email: '',
 	password: '',
 	repeat_password: '',
 };
 
-const Register = () => {
+const Register = (props) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const currentUser = useSelector((state) => state.entities.auth.currentUser);
+
+	useEffect(() => {
+		if (currentUser && currentUser._id) {
+			try {
+				if (currentUser.isAdmin) {
+					history.push('/admin/dashboard');
+				} else {
+					history.push('/customer');
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}, [currentUser, history]);
 	const onSubmit = (values) => {
+		dispatch(registerUser(values));
 		console.log('value sumbit');
 		console.log('val', values);
 	};
@@ -120,32 +138,6 @@ const Register = () => {
 									</div>
 									{/* username and email */}
 									<div className='mb-4 md:flex md:justify-between bg'>
-										<div className='mb-4 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 md:mr-2 md:mb-0'>
-											<label
-												className='block mb-2 text-sm font-bold text-gray-700'
-												htmlFor='firstName'
-											>
-												Nom d'utilisateur
-											</label>
-											<input
-												className={`w-full px- py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${
-													errors.username &&
-													touched.username &&
-													'border-red-500'
-												}`}
-												id='username'
-												name='username'
-												type='text'
-												placeholder='username123'
-												value={values.username}
-												onChange={handleChange}
-											/>
-											{errors.username && touched.username && (
-												<p className='text-xs italic text-red-500 mt-2'>
-													{errors.username}
-												</p>
-											)}
-										</div>
 										<div className='md:ml-2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2'>
 											<label
 												className='block mb-2 text-sm font-bold text-gray-700'

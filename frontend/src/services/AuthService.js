@@ -10,7 +10,7 @@ const headers = {
 const login = async (credential) =>
 	await http.post('/login', credential, headers);
 
-const register = async (data) => {};
+const register = async (data) => await http.post('/register', data, headers);
 
 const saveToken = (token) => localStorage.setItem(TOKEN, token);
 const getToken = () => localStorage.getItem(TOKEN);

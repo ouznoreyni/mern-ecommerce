@@ -19,6 +19,23 @@ export const loginUser = createAsyncThunk(
 	}
 );
 
+export const registerUser = createAsyncThunk(
+	'auth/register',
+	async (credential, thunkAPI) => {
+		try {
+			const response = await auth.register(credential);
+			console.log('response ==>', response);
+			if (response.data) {
+				auth.saveToken(response.data.token);
+				return response.data.user;
+			}
+		} catch (error) {
+			notify.error(error.message);
+			return thunkAPI.rejectWithValue(error.message);
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
@@ -52,6 +69,26 @@ const authSlice = createSlice({
 			currentUser: payload,
 		}),
 		[loginUser.rejected]: (state, { payload }) => {
+			console.log('reject', payload);
+			return {
+				...state,
+				isFetching: false,
+				isSuccess: false,
+				isError: true,
+				errorMessage: payload,
+			};
+		},
+
+		[registerUser.pending]: (state, { payload }) => ({
+			...state,
+			loading: true,
+		}),
+		[registerUser.fulfilled]: (state, { payload }) => ({
+			loading: false,
+			message: '',
+			currentUser: payload,
+		}),
+		[registerUser.rejected]: (state, { payload }) => {
 			console.log('reject', payload);
 			return {
 				...state,
