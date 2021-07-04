@@ -9,7 +9,7 @@ const ProductListAdmin = () => {
 	const productsSelector = useProducts();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
-	const [itemsCount, setItemsCount] = useState(10);
+	const [itemsCount] = useState(10);
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);

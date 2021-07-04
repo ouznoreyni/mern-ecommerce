@@ -57,7 +57,7 @@ const {
 
 export const loadProducts = (page = 1) =>
 	apiCallBegan({
-		url: `${url}?_page${page}&_limit=10`,
+		url: `${url}?page=${page}&_limit=10`,
 		onStart: productsRequested.type,
 		onSucces: productsReceived.type,
 		onError: productsRequestFailed.type,

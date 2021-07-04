@@ -11,14 +11,19 @@ const Pagination = (props) => {
 
 	return (
 		<div className='flex justify-center my-10 space-x-1 '>
-			<button className='flex items-center justify-center h-8 w-8 rounded text-gray-400'>
+			<button
+				className='flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200'
+				disabled={currentPage === 1}
+				onClick={() => onPageChange(1)}
+			>
 				<i className='fas fa-angle-double-left h-5 w-5'></i>
 			</button>
 			<button
-				className='flex items-center justify-center h-8 px-2 rounded text-sm font-medium text-gray-400'
-				disabled
+				className='flex items-center justify-center h-8 px-2 rounded text-sm font-medium hover:bg-indigo-200'
+				disabled={currentPage === 1}
+				onClick={() => onPageChange(currentPage - 1)}
 			>
-				Prev
+				Precedent
 			</button>
 			{pages.map((page) => {
 				return (
@@ -27,7 +32,7 @@ const Pagination = (props) => {
 						className={page === currentPage ? 'page-item active' : 'page-item'}
 					>
 						<button
-							className='flex items-center justify-center h-8 w-8 rounded bg-indigo-200 text-sm font-medium text-indigo-600'
+							className='flex items-center justify-center h-8 w-8 rounded text-sm font-medium text-indigo-600 hover:bg-indigo-200'
 							onClick={() => onPageChange(page)}
 						>
 							{page}
@@ -47,10 +52,18 @@ const Pagination = (props) => {
 			<button className='flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600'>
 				3
 			</button> */}
-			<button className='flex items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium text-gray-600 hover:text-indigo-600'>
-				Next
+			<button
+				className='flex items-center justify-center h-8 px-2 rounded hover:bg-indigo-200 text-sm font-medium  hover:text-indigo-600'
+				onClick={() => onPageChange(currentPage + 1)}
+				disabled={currentPage === pagesCount}
+			>
+				suivant
 			</button>
-			<button className='flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200 text-gray-600 hover:text-indigo-600'>
+			<button
+				className='flex items-center justify-center h-8 w-8 rounded hover:bg-indigo-200  hover:text-indigo-600'
+				disabled={currentPage === pagesCount}
+				onClick={() => onPageChange(pagesCount)}
+			>
 				<i className='fas fa-angle-double-right h-5 w-5'></i>
 			</button>
 		</div>

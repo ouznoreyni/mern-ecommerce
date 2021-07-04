@@ -25,24 +25,23 @@ const Products = () => {
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
+		dispatch(loadProducts(page));
 	};
 	useEffect(() => {
 		dispatch(loadProducts());
-		console.log('dis ', productsSelector.list);
-		// if (!isMounted) {
-		// 	const { params } = productsSelector.list;
+	}, [dispatch]);
 
-		// 	// setCurrentPage(params.page);
-		// 	// setItemsCount(params.totalProducts);
-		// 	// console.log('params ', params);
-		// 	//	console.log('product ', productsSelector);
-		// 	// console.log('********************* end');
-		// }
+	useEffect(() => {
+		const { params } = productsSelector.list;
+		if (params) {
+			setCurrentPage(params.page);
+			setItemsCount(params.totalProducts);
+		}
 
 		return () => {
 			setisMounted(true);
 		};
-	}, []);
+	}, [dispatch, isMounted, productsSelector]);
 
 	return (
 		<MainLayout>
