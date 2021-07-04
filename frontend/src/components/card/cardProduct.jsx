@@ -2,18 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CardProduct = ({ product }) => {
+	const addCart = async (product) => {
+		console.log('product ', product, ' added to the cart');
+	};
+
 	return (
-		<div>
+		<div className='shadow-lg p-2 '>
 			<Link
-				to={`/products/${product.id}`}
+				to={`/products/${product._id}`}
 				className='block h-64 rounded-lg shadow-lg bg-gray-600'
 				style={{
 					backgroundImage: `url(${product.image})`,
 					backgroundSize: 'cover',
 				}}
 			></Link>
-
-			<div className='flex items-center justify-between mt-3'>
+			<button
+				onClick={() => addCart(product)}
+				className='relative float-right bottom-7 bg-green-400 mr-1 text-white'
+			>
+				Ajouter au panier
+			</button>
+			<div className='flex items-center justify-between mt-3 w-full'>
 				<div>
 					<Link to={`/products/${product._id}`} className='font-medium'>
 						{product.title}
