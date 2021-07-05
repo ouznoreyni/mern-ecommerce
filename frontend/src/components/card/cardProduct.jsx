@@ -7,12 +7,12 @@ const CardProduct = ({ product }) => {
 	};
 
 	return (
-		<div className='shadow-lg p-2 '>
+		<div className='shadow-lg p-2 bg-gray-200'>
 			<Link
 				to={`/products/${product._id}`}
 				className='block h-64 rounded-lg shadow-lg bg-gray-600'
 				style={{
-					backgroundImage: `url(${product.image})`,
+					backgroundImage: `url('https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')`,
 					backgroundSize: 'cover',
 				}}
 			></Link>
