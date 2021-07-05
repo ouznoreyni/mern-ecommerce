@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../store/CartSlice';
+import { addToCart, removeItemCart } from '../../store/CartSlice';
 
 const CartItem = ({ onChange, item }) => {
 	const dispatch = useDispatch();
@@ -19,6 +19,10 @@ const CartItem = ({ onChange, item }) => {
 			dispatch(addToCart(item.product._id, item.quantity - 1));
 		}
 	};
+	const onRemoveItem = (item) => {
+		dispatch(removeItemCart(item));
+		console.log('item ', item, 'removed');
+	};
 	return (
 		<div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
 			<div className='flex w-2/5'>
@@ -32,8 +36,11 @@ const CartItem = ({ onChange, item }) => {
 				<div className='flex flex-col justify-between ml-4 flex-grow'>
 					<span className='font-bold text-sm'>{item.product.title}</span>
 					<span className='text-red-500 text-xs'>{item.product.brand}</span>
-					<button className='font-semibold hover:text-red-500 text-gray-500 text-xs'>
-						Remove
+					<button
+						onClick={() => onRemoveItem(item)}
+						className='font-semibold hover:text-red-500 text-gray-500 text-xs'
+					>
+						supprimer
 					</button>
 				</div>
 			</div>

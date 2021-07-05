@@ -42,16 +42,22 @@ const cartSlice = createSlice({
 		removeItemCart: (state, action) => {
 			const { cartItems } = state.list;
 			state.list.cartItems = cartItems.filter(
-				(i) => i.product._id !== action.payload._id
+				(i) => i.product._id !== action.payload.product._id
 			);
 		},
-		clear_item_cart: (state, action) => {},
+		clear_item_cart: (state, action) => {
+			state.list.cartItems = [];
+		},
 	},
 	extraReducers: {},
 });
 
-const { addItemCartReceived, addItemCartRequested, addItemCartRequestFailed } =
-	cartSlice.actions;
+export const {
+	addItemCartReceived,
+	addItemCartRequested,
+	addItemCartRequestFailed,
+	removeItemCart,
+} = cartSlice.actions;
 
 export const addToCart =
 	(id, quantity = 2) =>
