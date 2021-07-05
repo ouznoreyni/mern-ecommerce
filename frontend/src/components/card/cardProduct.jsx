@@ -1,9 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../../store/CartSlice';
 
 const CardProduct = ({ product }) => {
+	const dispatch = useDispatch();
+
 	const addCart = async (product) => {
 		console.log('product ', product, ' added to the cart');
+		dispatch(addToCart(product._id));
 	};
 
 	return (

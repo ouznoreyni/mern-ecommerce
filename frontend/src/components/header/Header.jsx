@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Brand from './Brand';
 const Header = ({ onPressCart }) => {
+	const cartSelector = useSelector((state) => state.entities.cart);
+	useEffect(() => {
+		console.log('card selector==>', cartSelector);
+		return () => {};
+	}, []);
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
 	const handleToggleDropDown = () => setIsDropDownOpen(!isDropDownOpen);
@@ -53,7 +59,8 @@ const Header = ({ onPressCart }) => {
 							className='px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline'
 							to='/cart'
 						>
-							<i className='fas fa-shopping-cart'></i> 3
+							<i className='fas fa-shopping-cart'></i>{' '}
+							{cartSelector.list.cartItems.length}
 						</Link>
 					</nav>
 				</div>
