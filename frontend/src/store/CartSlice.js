@@ -2,12 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { apiCallBegan } from './Api';
 
 const url = '/products';
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+	? JSON.parse(localStorage.getItem('cartItems'))
+	: [];
 
 const cartSlice = createSlice({
 	name: 'cart',
 	initialState: {
 		list: {
-			cartItems: [],
+			cartItems: cartItemsFromStorage,
 			shippingAddress: {},
 		},
 		loading: false,
@@ -51,7 +54,7 @@ const { addItemCartReceived, addItemCartRequested, addItemCartRequestFailed } =
 	cartSlice.actions;
 
 export const addToCart =
-	(id, quantity = 1) =>
+	(id, quantity = 2) =>
 	async (dispatch, getState) => {
 		await dispatch(
 			apiCallBegan({

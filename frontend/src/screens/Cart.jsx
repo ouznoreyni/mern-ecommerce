@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/card/CartItem';
 import MainLayout from '../components/layout/MainLayout';
 
 const Cart = () => {
+	const [totalProduct, setTotalProduct] = useState();
+
+	const cartSelector = useSelector((state) => state.entities.cart);
+	useEffect(() => {
+		setTotalProduct(calculateTotalProduct(cartSelector));
+		return () => {};
+	}, [cartSelector]);
+
+	const calculateTotalProduct = (cartSelector) => {
+		let total = 0;
+		cartSelector.list.cartItems.map((item) => {
+			const { product, quantity } = item;
+			total += product.price * quantity;
+		});
+		return total;
+	};
 	return (
 		<MainLayout>
 			<div className='container mx-auto mt-10'>
@@ -11,7 +28,9 @@ const Cart = () => {
 					<div className='w-3/4 bg-white px-10 py-10'>
 						<div className='flex justify-between border-b pb-8'>
 							<h1 className='font-semibold text-2xl'>Mes Achats</h1>
-							<h2 className='font-semibold text-2xl'>3 produit</h2>
+							<h2 className='font-semibold text-2xl'>
+								{cartSelector.list.cartItems.length} produit
+							</h2>
 						</div>
 						<div className='flex mt-10 mb-5'>
 							<h3 className='font-semibold text-gray-600 text-xs uppercase w-2/5'>
@@ -27,10 +46,14 @@ const Cart = () => {
 								Total
 							</h3>
 						</div>
+						{cartSelector.list.cartItems.map((item) => (
+							<CartItem
+								onChange={() => null}
+								key={item.product._id}
+								item={item}
+							/>
+						))}
 
-						<CartItem onChange={() => null} />
-						<CartItem onChange={() => null} />
-						<CartItem onChange={() => null} />
 						<Link
 							to='/products'
 							className='flex font-semibold text-indigo-600 text-sm mt-10'
@@ -47,19 +70,19 @@ const Cart = () => {
 
 					<div id='summary' className='w-1/4 px-8 py-10'>
 						<h1 className='font-semibold text-2xl border-b pb-8'>
-							Order Summary
+							Récapitulatif de la commande
 						</h1>
 						<div className='flex justify-between mt-10 mb-5'>
 							<span className='font-semibold text-sm uppercase'>
-								3 produits
+								{cartSelector.list.cartItems.length} produits
 							</span>
-							<span className='font-semibold text-sm'>590$</span>
+							<span className='font-semibold text-sm'></span>
 						</div>
 
 						<div className='border-t mt-8'>
 							<div className='flex font-semibold justify-between py-6 text-sm uppercase'>
 								<span>Coût total</span>
-								<span>$600</span>
+								<span>{totalProduct} franc cfa</span>
 							</div>
 							<button className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full'>
 								Valider la commande
