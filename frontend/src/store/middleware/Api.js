@@ -13,11 +13,15 @@ const api =
 		next(action);
 
 		try {
+			const token = await localStorage.getItem('token');
 			const response = await axios.request({
 				baseURL: process.env.REACT_APP_API_URL,
 				url,
 				method,
 				data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			});
 			//General success dispatch
 			dispatch(actions.apiCallSuccess(response.data));

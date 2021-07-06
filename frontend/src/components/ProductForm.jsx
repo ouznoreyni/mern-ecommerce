@@ -1,31 +1,44 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import { addProduct } from '../store/ProductSlice';
 
 const validationSchema = Yup.object().shape({
-	name: Yup.string().required('Required').min(5).max(150),
+	title: Yup.string().required('Required').min(5).max(150),
 	brand: Yup.string().required('Required').min(5).max(50),
 	description: Yup.string().required('Required'),
 	price: Yup.number().required('Required').min(500),
-	count_in_stock: Yup.number().required('Required').min(0),
-	category_id: Yup.number().required('Required'),
+	countInStock: Yup.number().required('Required').min(0),
+	category: Yup.string().required('Required'),
 	image: Yup.mixed(),
 });
 
 const initialValues = {
-	name: '',
+	title: '',
 	brand: '',
 	description: '',
 	price: '',
-	count_in_stock: '',
-	category_id: '',
+	countInStock: '',
+	category: '',
 };
 
 const ProductForm = ({ product = {} }) => {
+	const dispatch = useDispatch();
+	const [file, setfile] = useState();
 	const onSubmit = async (product) => {
-		console.log('clic');
-		console.log(product);
+		if (!file) {
+			console.log('ajouter un fichier');
+			return;
+		}
+		const data = new FormData();
+		for (const [key, value] of Object.entries(product)) {
+			data.append(key, value);
+		}
+		data.append('image', file);
+		dispatch(addProduct(data));
 	};
+
 	return (
 		<>
 			<Formik
@@ -64,12 +77,12 @@ const ProductForm = ({ product = {} }) => {
 									</label>
 									<input
 										className={`py-2 px-3 rounded-lg border-2 border-gray-400 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent ${
-											errors.name && touched.name && 'border-red-500'
+											errors.title && touched.title && 'border-red-500'
 										}`}
 										type='text'
 										placeholder='name'
-										name='name'
-										value={values.name}
+										name='title'
+										value={values.title}
 										onChange={handleChange}
 									/>
 								</div>
@@ -92,7 +105,7 @@ const ProductForm = ({ product = {} }) => {
 							{/* row */}
 							<div className='grid grid-cols-1 mt-5 mx-7'>
 								<label className='uppercase md:text-sm text-xs text-gray-500 text-light font-semibold'>
-									Description
+									description
 								</label>
 								<textarea
 									className={`py-2 px-3 rounded-lg border-2 border-gray-400 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent ${
@@ -132,15 +145,15 @@ const ProductForm = ({ product = {} }) => {
 									<input
 										className={`py-2 px-3 rounded-lg border-2 border-gray-400 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent'
 										type='number ${
-											errors.count_in_stock &&
-											touched.count_in_stock &&
+											errors.countInStock &&
+											touched.countInStock &&
 											'border-red-500'
 										}`}
 										placeholder='Nombre de produit en Stock'
-										name='count_in_stock'
+										name='countInStock'
 										type='number'
 										min='0'
-										value={values.count_in_stock}
+										value={values.countInStock}
 										onChange={handleChange}
 									/>
 								</div>
@@ -152,15 +165,13 @@ const ProductForm = ({ product = {} }) => {
 								</label>
 								<select
 									className={`py-2 px-3 rounded-lg border-2 border-gray-400 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent ${
-										errors.category_id &&
-										touched.category_id &&
-										'border-red-500'
+										errors.category && touched.category && 'border-red-500'
 									}`}
-									name='category_id'
-									value={values.category_id}
+									name='category'
+									value={values.category}
 									onChange={handleChange}
 								>
-									<option value='1'>Categorie 1</option>
+									<option value='60d1cf4ee7c73a3ee4dfe294'>Categorie 1</option>
 									<option value='1'>Categorie 2</option>
 									<option value='1'>Categorie 3</option>
 								</select>
@@ -191,7 +202,12 @@ const ProductForm = ({ product = {} }) => {
 												Selectionne une photo
 											</p>
 										</div>
-										<input type='file' className='hidden' name='image' />
+										<input
+											type='file'
+											className='hidden'
+											name='image'
+											onChange={(e) => setfile(e.target.files[0])}
+										/>
 									</label>
 								</div>
 							</div>
