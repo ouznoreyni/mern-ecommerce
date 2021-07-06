@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { apiCallBegan } from './Api';
 
 const url = '/products';
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-	? JSON.parse(localStorage.getItem('cartItems'))
+const cartItems = 'cartItems';
+
+const cartItemsFromStorage = localStorage.getItem(cartItems)
+	? JSON.parse(localStorage.getItem(cartItems))
 	: [];
 
 const cartSlice = createSlice({
@@ -44,9 +46,12 @@ const cartSlice = createSlice({
 			state.list.cartItems = cartItems.filter(
 				(i) => i.product._id !== action.payload.product._id
 			);
+
+			localStorage.setItem('cartItems', JSON.stringify(state.list.cartItems));
 		},
-		clear_item_cart: (state, action) => {
+		clearItemCart: (state, action) => {
 			state.list.cartItems = [];
+			localStorage.removeItem(cartItems);
 		},
 	},
 	extraReducers: {},
@@ -57,6 +62,7 @@ export const {
 	addItemCartRequested,
 	addItemCartRequestFailed,
 	removeItemCart,
+	clearItemCart,
 } = cartSlice.actions;
 
 export const addToCart =
@@ -73,7 +79,7 @@ export const addToCart =
 		);
 
 		localStorage.setItem(
-			'cartItems',
+			cartItems,
 			JSON.stringify(getState().entities.cart.list.cartItems)
 		);
 	};

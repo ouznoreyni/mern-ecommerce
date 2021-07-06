@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/card/CartItem';
 import MainLayout from '../components/layout/MainLayout';
+import { clearItemCart } from '../store/CartSlice';
 
 const Cart = () => {
 	const [totalProduct, setTotalProduct] = useState();
-
+	const dispatch = useDispatch();
 	const cartSelector = useSelector((state) => state.entities.cart);
 	useEffect(() => {
 		setTotalProduct(calculateTotalProduct(cartSelector));
@@ -20,6 +21,10 @@ const Cart = () => {
 			total += product.price * quantity;
 		});
 		return total;
+	};
+
+	const handleClearCart = () => {
+		dispatch(clearItemCart());
 	};
 	return (
 		<MainLayout>
@@ -55,18 +60,27 @@ const Cart = () => {
 								/>
 							))}
 
-							<Link
-								to='/products'
-								className='flex font-semibold text-indigo-600 text-sm mt-10'
-							>
-								<svg
-									className='fill-current mr-2 text-indigo-600 w-4'
-									viewBox='0 0 448 512'
+							<div className='flex 1'>
+								<Link
+									to='/products'
+									className='flex flex-1 font-semibold text-indigo-600 text-sm mt-10'
 								>
-									<path d='M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z' />
-								</svg>
-								Continuer mes achats
-							</Link>
+									<svg
+										className='fill-current mr-2 text-indigo-600 w-4'
+										viewBox='0 0 448 512'
+									>
+										<path d='M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z' />
+									</svg>
+									Continuer mes achats
+								</Link>
+
+								<button
+									onClick={handleClearCart}
+									className='flex font-semibold text-red-600 text-sm mt-10'
+								>
+									Vider mon panier
+								</button>
+							</div>
 						</div>
 
 						<div id='summary' className='w-1/4 px-8 py-10'>
