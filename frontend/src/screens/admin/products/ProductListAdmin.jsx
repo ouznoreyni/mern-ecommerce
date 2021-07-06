@@ -26,7 +26,7 @@ const ProductListAdmin = () => {
 			<div className='py-8'>
 				<div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
 					<Link
-						class='float-right text-center rounded-r-lg bg-gray-600  text-white font-bold p-4 md:w-3/12 w-1/2 uppercase border-gray-600 border-t border-b border-r mb-2'
+						className='float-right text-center rounded-r-lg bg-gray-600  text-white font-bold p-4 md:w-3/12 w-1/2 uppercase border-gray-600 border-t border-b border-r mb-2'
 						to='/admin/products/add'
 					>
 						ajouter

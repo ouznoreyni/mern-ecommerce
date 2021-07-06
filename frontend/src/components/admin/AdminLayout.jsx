@@ -62,7 +62,7 @@ const AdminLayout = ({ children }) => {
 						<NavAdminItem
 							name='clients'
 							iconClass='fas fa-users'
-							urlPath='/admin/customers'
+							urlPath='/admin/users'
 						/>
 					</nav>
 				</div>

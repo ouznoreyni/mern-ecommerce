@@ -16,8 +16,8 @@ const TableHeader = (props) => {
 		const { sortColumn } = props;
 
 		if (column.path !== sortColumn.path) return null;
-		if (sortColumn.order === 'asc') return <i class='fas fa-sort-up'></i>;
-		return <i class='fas fa-sort-down'></i>;
+		if (sortColumn.order === 'asc') return <i className='fas fa-sort-up'></i>;
+		return <i className='fas fa-sort-down'></i>;
 	};
 	const { columns } = props;
 	return (

@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import About from '../screens/About';
 import CategoryListAdmin from '../screens/admin/categories/CategoryListAdmin';
-import CustomersListAdmin from '../screens/admin/users/UsersListAdmin';
 import Dashboard from '../screens/admin/Dashboard';
 import ErrorAdminPages from '../screens/admin/ErrorAdminPages';
 import OrderListAdmin from '../screens/admin/orders/OrderListAdmin';
 import ProductCreation from '../screens/admin/products/ProductCreation';
 import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
+import UsersListAdmin from '../screens/admin/users/UsersListAdmin';
 import Cart from '../screens/Cart';
 import Contact from '../screens/Contact';
 import DashboardCustomer from '../screens/customer/DashboardCustomer';
@@ -64,10 +64,7 @@ const index = () => {
 				path='/admin/categories'
 				component={CategoryListAdmin}
 			></AdminRoute>
-			<AdminRoute
-				path='/admin/customers'
-				component={CustomersListAdmin}
-			></AdminRoute>
+			<AdminRoute path='/admin/users' component={UsersListAdmin}></AdminRoute>
 			<AdminRoute path='/admin/orders' component={OrderListAdmin}></AdminRoute>
 
 			<AdminRoute path='/admin/*' component={ErrorAdminPages}></AdminRoute>

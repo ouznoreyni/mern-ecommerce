@@ -22,7 +22,7 @@ const OrderListAdmin = () => {
 		loadOrders(currentPage);
 	};
 	useEffect(() => {
-		loadOrders();
+		// loadOrders();
 	}, []);
 
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
