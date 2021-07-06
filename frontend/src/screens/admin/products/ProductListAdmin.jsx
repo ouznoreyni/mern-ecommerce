@@ -1,21 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import Pagination from '../../../components/common/Pagination';
 import ProductTable from '../../../components/tables/ProductTable';
 import useProducts from '../../../hooks/useProducts';
+import { loadProducts } from '../../../store/ProductSlice';
 
 const ProductListAdmin = () => {
 	const productsSelector = useProducts();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
-	const [itemsCount] = useState(10);
+	const [itemsCount, setItemsCount] = useState(10);
+	const dispatch = useDispatch();
+	const [isMounted, setisMounted] = useState(false);
 
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
+		dispatch(loadProducts(page));
 	};
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		dispatch(loadProducts());
+	}, [dispatch]);
+	useEffect(() => {
+		const { params } = productsSelector.list;
+		if (params) {
+			setCurrentPage(params.page);
+			setItemsCount(params.totalProducts);
+		}
+
+		return () => {
+			setisMounted(true);
+		};
+	}, [dispatch, isMounted, productsSelector]);
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
 
 	const handleDelete = () => {};
