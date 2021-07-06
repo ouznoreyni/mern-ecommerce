@@ -14,7 +14,7 @@ const CategoryTable = (props) => {
 
 	const columns = [
 		{ path: 'name', label: 'name' },
-		{ path: 'created_at', label: 'ajouté' },
+		{ path: 'createdAt', label: 'ajouté' },
 	];
 
 	const addDeleteColumn = () => {
