@@ -22,6 +22,7 @@ const userSlice = createSlice({
 			state.message = action.payload;
 		},
 		usersReceived: (state, action) => {
+			console.log('payload ', action);
 			state.list = action.payload;
 			state.loading = false;
 			state.lastFetch = Date.now();

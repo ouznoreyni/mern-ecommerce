@@ -14,11 +14,10 @@ const UserTable = (props) => {
 
 	const columns = [
 		{
-			path: 'first_name',
+			path: 'firstName',
 			label: 'prenom',
 		},
-		{ path: 'last_name', label: 'nom' },
-		{ path: 'currentUsername', label: 'nom utilisateur' },
+		{ path: 'lastName', label: 'nom' },
 		{ path: 'email', label: 'email' },
 		{ path: 'isAdmin', label: 'admin' },
 	];
