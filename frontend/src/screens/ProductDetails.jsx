@@ -20,6 +20,11 @@ const ProductDetails = (props) => {
 		};
 		getProduct(id);
 	}, [product, id, history]);
+
+	useEffect(() => {
+		console.log('prod', product);
+		return () => {};
+	}, []);
 	return (
 		<MainLayout>
 			{' '}
