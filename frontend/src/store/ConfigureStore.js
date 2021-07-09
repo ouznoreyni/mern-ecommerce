@@ -4,7 +4,7 @@ import reducers from './Reducers';
 
 const store = configureStore({
 	reducer: { entities: reducers },
-	middleware: [...getDefaultMiddleware(), api],
+	middleware: [...getDefaultMiddleware({ serializableCheck: false }), api],
 });
 
 export default store;

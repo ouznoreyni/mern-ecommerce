@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../../store/CartSlice';
+import { converTobase64 } from '../../utils/convertTobase64';
 
 const CardProduct = ({ product }) => {
 	const dispatch = useDispatch();
+	useEffect(() => {
+		console.log('p ', product.image.data);
+		converTobase64(product);
+		return () => {};
+	}, []);
 
 	const addCart = async (product) => {
 		console.log('product ', product, ' added to the cart');
@@ -17,10 +23,16 @@ const CardProduct = ({ product }) => {
 				to={`/products/${product._id}`}
 				className='block h-64 rounded-lg shadow-lg bg-gray-600'
 				style={{
-					backgroundImage: `url('https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')`,
+					backgroundImage: `url(data:image/jpeg;base64,${converTobase64(
+						product
+					)})`,
 					backgroundSize: 'cover',
 				}}
 			></Link>
+			{/* <img
+				src={`data:image/jpeg;base64,${converTobase64(product)}`}
+				alt='holl'
+			/> */}
 			<button
 				onClick={() => addCart(product)}
 				className='relative float-right bottom-7 bg-green-400 mr-1 text-white'

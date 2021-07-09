@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart, removeItemCart } from '../../store/CartSlice';
+import { converTobase64 } from '../../utils/convertTobase64';
 
 const CartItem = ({ onChange, item }) => {
 	const dispatch = useDispatch();
@@ -28,9 +29,9 @@ const CartItem = ({ onChange, item }) => {
 			<div className='flex w-2/5'>
 				<div className='w-20'>
 					<img
-						className='h-24'
-						src='https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z'
-						alt=''
+						className='h-24 cover-full'
+						src={`data:image/jpeg;base64,${converTobase64(item.product)}`}
+						alt={item.product.title}
 					/>
 				</div>
 				<div className='flex flex-col justify-between ml-4 flex-grow'>
