@@ -7,7 +7,10 @@ import { validateProduct } from '../validations/product'
 // @route   GET /api/products
 // @access  Public
 export const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10
+  const pageSize =
+    Number(req.query.limit) && Number(req.query.limit) >= 1
+      ? Number(req.query.limit)
+      : 10
   const page = Number(req.query.page) || 1
   const skip = pageSize * (page - 1)
 
@@ -19,10 +22,14 @@ export const getProducts = asyncHandler(async (req, res) => {
         },
       }
     : {}
+  const sort = {
+    createdAt: -1,
+  }
   const count = await Product.countDocuments({ ...title })
   const products = await Product.find({ ...title })
     .limit(pageSize)
     .skip(skip)
+    .sort(sort)
 
   const params = {
     page,
