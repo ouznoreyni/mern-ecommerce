@@ -2,49 +2,14 @@ const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 
-const dir = path.join(`${__dirname}/../../../uploads`)
-
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png/
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
-
-  if (extname && mimetype) {
-    return cb(null, true)
-  } else {
-    cb('Please upload an image!')
-  }
-}
-
-export const uploadFile = (folderDestination = 'products') => {
-  try {
-    const date = new Date()
-    const dateUpload = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
-    const dest = `${dir}/${folderDestination}/${dateUpload}`
-
-    var storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        if (!fs.existsSync(dest)) {
-          fs.mkdirSync(dest, { recursive: true })
-        }
-        cb(null, dest)
-      },
-      filename: function (req, file, cb) {
-        cb(
-          null,
-          `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-        )
-      },
-    })
-
-    var upload = multer({
-      storage: storage,
-      fileFilter: function (req, file, cb) {
-        checkFileType(file, cb)
-      },
-    })
-    return upload
-  } catch (error) {
-    console.error(error)
-  }
-}
+export const upload = multer({
+  limits: {
+    fileSize: 10000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+      cb(new Error('Please upload an image.'))
+    }
+    cb(undefined, true)
+  },
+})

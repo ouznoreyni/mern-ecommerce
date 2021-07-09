@@ -28,7 +28,7 @@ const productSchema = mongoose.Schema(
       unique: true,
       required: true,
     },
-    image: { data: Buffer, contentType: String },
+    image: { type: Buffer, failIndexKeyTooLong: false },
     price: {
       type: Number,
       required: true,
@@ -68,6 +68,8 @@ const productSchema = mongoose.Schema(
     timestamps: true,
   }
 )
+
+productSchema.index({ image: 'text' })
 
 const Product = mongoose.model('Product', productSchema)
 

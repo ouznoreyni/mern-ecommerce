@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import sharp from 'sharp'
 import Product from '../models/product'
 import { validateProduct } from '../validations/product'
 
@@ -65,10 +66,13 @@ export const createProduct = asyncHandler(async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: 'add image please' })
     }
-    const image = { contentType: req.file.mimetype, data: req.file.path }
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 500, height: 500 })
+      .png()
+      .toBuffer()
     let product = await Product.create({
       user: req.user,
-      image,
+      image: buffer,
       ...req.body,
     })
     product = await product.populate('category').execPopulate()
