@@ -15,3 +15,11 @@ exports.validateProduct = (data) => {
   const schemaProduct = Joi.object(objectProductSchema)
   return schemaProduct.validate(data)
 }
+
+exports.validateReview = (data) => {
+  const schemaReview = Joi.object({
+    comment: Joi.string().required(),
+    rating: Joi.number().min(1).max(5).required(),
+  })
+  return schemaReview.validate(data)
+}

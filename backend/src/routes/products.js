@@ -7,6 +7,7 @@ const {
   createProduct,
   deleteProduct,
   getTopProducts,
+  reviewProduct,
 } = require('../controllers/products')
 const router = express.Router()
 
@@ -17,4 +18,5 @@ router
   .get(getProducts)
   .post(protect, upload.single('image'), createProduct)
 router.route('/:_id').get(getProduct).delete(deleteProduct)
+router.route('/:_id/reviews').post([protect], reviewProduct)
 module.exports = router

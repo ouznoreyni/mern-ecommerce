@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import sharp from 'sharp'
 import Product from '../models/product'
-import { validateProduct } from '../validations/product'
+import { validateProduct, validateReview } from '../validations/product'
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -25,6 +25,7 @@ export const getProducts = asyncHandler(async (req, res) => {
   const sort = {
     createdAt: -1,
   }
+
   const count = await Product.countDocuments({ ...title })
   const products = await Product.find({ ...title })
     .limit(pageSize)
@@ -110,8 +111,60 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 export const getTopProducts = asyncHandler(async (req, res) => {
   try {
     const products = await Product.find({}).sort({ rating: -1 }).limit(8)
-    res.json({ products })
+    return res.json({ products })
   } catch (error) {
+    return res.status(500).json({ message: 'Oup! something goes wrong' })
+  }
+})
+
+// @desc    Review a product
+// @route   POST /api/products/_id/review
+// @access  Private
+export const reviewProduct = asyncHandler(async (req, res) => {
+  try {
+    const { error } = validateReview(req.body)
+    console.log(error)
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message })
+    }
+    const product = await Product.findById(req.params._id)
+    if (!product) return res.status(404).json({ message: 'product not found' })
+
+    const { rating, comment } = req.body
+    console.log(
+      'rev ',
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length
+    )
+    if (product) {
+      const alreadyReviewed = product.reviews.find(
+        (rev) => rev.user.toString() === req.user._id.toString()
+      )
+
+      if (alreadyReviewed) {
+        return res.status(400).json({ message: 'Product already reviewed' })
+      }
+
+      const review = {
+        name: `${req.user.firstName} ${req.user.lastName}`,
+        rating: Number(rating),
+        comment,
+        user: req.user._id,
+      }
+
+      product.reviews.push(review)
+
+      product.numReviews = product.reviews.length
+
+      product.rating =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length
+
+      await product.save()
+      return res.status(201).json({ product })
+    }
+  } catch (error) {
+    console.log('error ', error)
     return res.status(500).json({ message: 'Oup! something goes wrong' })
   }
 })
