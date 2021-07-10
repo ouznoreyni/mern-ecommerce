@@ -9,6 +9,7 @@ const productSlice = createSlice({
 		list: {
 			products: [],
 		},
+		product: {},
 		loading: false,
 		message: '',
 		lastFetch: null,
@@ -16,21 +17,31 @@ const productSlice = createSlice({
 	reducers: {
 		productsRequested: (state, action) => {
 			state.loading = true;
+			state.product = {};
 		},
 		productsRequestFailed: (state, action) => {
 			state.loading = false;
 			state.message = action.payload;
+			state.product = {};
 		},
 		productsReceived: (state, action) => {
 			state.list = action.payload;
 			state.loading = false;
 			state.lastFetch = Date.now();
+			state.product = {};
+		},
+		productReceived: (state, action) => {
+			state.product = action.payload;
+			state.loading = false;
+			state.lastFetch = Date.now();
 		},
 		productAdded: (state, action) => {
 			state.list.products.push(action.payload);
+			state.product = {};
 		},
 		productDeleted: (state, action) => {
 			const products = state.list.products;
+			state.product = {};
 			const { _id } = action.payload;
 			console.log('pr ', products);
 			const existingProduct = products.find((p) => p._id === _id);
@@ -40,6 +51,7 @@ const productSlice = createSlice({
 		},
 		productSearch: (state, action) => {
 			state.list.products = action.payload;
+			state.product = {};
 		},
 	},
 });
@@ -51,6 +63,7 @@ const {
 	productAdded,
 	productDeleted,
 	productSearch,
+	productReceived,
 } = productSlice.actions;
 
 /*Action Creators*/
@@ -94,6 +107,12 @@ export const updateProduct = (product) =>
 		method: 'put',
 		data: product,
 		onSucces: productDeleted.type,
+	});
+
+export const getProduct = (id) =>
+	apiCallBegan({
+		url: `${url}/${id}`,
+		onSucces: productReceived.type,
 	});
 
 export const deleteProduct = (product) =>

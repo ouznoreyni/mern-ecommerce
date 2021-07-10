@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import MainLayout from '../components/layout/MainLayout';
 import productsService from '../services/ProductsService';
+import { converTobase64 } from '../utils/convertTobase64';
 
 const ProductDetails = (props) => {
 	const [product, setProduct] = useState({});
@@ -13,13 +14,14 @@ const ProductDetails = (props) => {
 		const getProduct = async (id) => {
 			try {
 				const { data } = await productsService.retrieve(id);
-				setProduct(data);
+				console.log('data ', data);
+				setProduct(data.product);
 			} catch (error) {
 				history.push('/not-found');
 			}
 		};
 		getProduct(id);
-	}, [product, id, history]);
+	}, []);
 
 	useEffect(() => {
 		console.log('prod', product);
@@ -59,7 +61,9 @@ const ProductDetails = (props) => {
 									<div
 										className='h-64 md:h-80 rounded-lg  mb-4 flex items-center justify-center'
 										style={{
-											backgroundImage: `url(${product.image})`,
+											backgroundImage: `url(data:image/jpeg;base64,${converTobase64(
+												product
+											)})`,
 											backgroundSize: 'cover',
 										}}
 									></div>
