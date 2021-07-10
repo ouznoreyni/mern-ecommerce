@@ -1,16 +1,31 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CardProduct from '../components/card/cardProduct';
 import MainLayout from '../components/layout/MainLayout';
 import ProductCarousel from '../components/ProductCarousel';
-
+import { getTopProduct, loadProducts } from '../store/ProductSlice';
 const Home = () => {
+	const dispatch = useDispatch();
+	const topProductsSelector = useSelector(
+		(state) => state.entities.product.topProducts
+	);
+	const productsSelector = useSelector(
+		(state) => state.entities.product.list.products
+	);
 	// const [products] = useState(data.products.slice(0, 4));
 	// const [productsTOp] = useState(data.products.slice(0, 8));
 	// const productState = useSelector((state) => state.entities.product.entities);
 	// const dispatch = useDispatch();
 
 	useEffect(() => {
+		dispatch(loadProducts());
 		return () => {};
-	});
+	}, []);
+
+	useEffect(() => {
+		dispatch(getTopProduct());
+		return () => {};
+	}, []);
 
 	return (
 		<MainLayout>
@@ -47,15 +62,20 @@ const Home = () => {
 			<div className='mt-5'>
 				<h2 className='w-full text-center'>Dernières nouveautés</h2>
 				<div className='flex content-center'>
-					<div className='grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
-						{/* {products.map((p) => (
+					<div className='grid 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
+						{productsSelector.map((p) => (
 							<CardProduct key={p._id} product={p} />
-						))} */}
+						))}
 					</div>
 				</div>
 				<h2 className='w-full text-center mt-4'>Les plus demandés</h2>
-				<div className='mx-5'>
+				<div className='mt-5'>
 					{/* <MultiplePoductsSlide products={productsTOp} /> */}
+					<div className='grid 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
+						{topProductsSelector.map((p) => (
+							<CardProduct key={p._id} product={p} />
+						))}
+					</div>
 				</div>
 			</div>
 			{/* end lastest and top products */}

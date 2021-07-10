@@ -9,6 +9,7 @@ const productSlice = createSlice({
 		list: {
 			products: [],
 		},
+		topProducts: [],
 		product: {},
 		loading: false,
 		message: '',
@@ -53,6 +54,10 @@ const productSlice = createSlice({
 			state.list.products = action.payload;
 			state.product = {};
 		},
+		topProductsReceived: (state, { payload }) => {
+			state.topProducts = payload.products;
+			state.loading = false;
+		},
 	},
 });
 
@@ -64,6 +69,7 @@ const {
 	productDeleted,
 	productSearch,
 	productReceived,
+	topProductsReceived,
 } = productSlice.actions;
 
 /*Action Creators*/
@@ -113,6 +119,12 @@ export const getProduct = (id) =>
 	apiCallBegan({
 		url: `${url}/${id}`,
 		onSucces: productReceived.type,
+	});
+
+export const getTopProduct = () =>
+	apiCallBegan({
+		url: `${url}/top`,
+		onSucces: topProductsReceived.type,
 	});
 
 export const deleteProduct = (product) =>
