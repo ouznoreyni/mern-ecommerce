@@ -15,7 +15,6 @@ const orderSchema = mongoose.Schema(
           ref: 'Product',
         },
         quantity: { type: Number, required: true },
-        price: { type: Number, required: true },
       },
     ],
     shippingAddress: {
@@ -26,6 +25,8 @@ const orderSchema = mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
+      enum: ['CASH', 'CARD', 'SKIP'],
+      default: 'SKIP',
     },
     paymentResult: {
       id: { type: String },
