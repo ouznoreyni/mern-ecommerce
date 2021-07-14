@@ -18,6 +18,7 @@ import Login from '../screens/Login';
 import ProductDetails from '../screens/ProductDetails';
 import Products from '../screens/Products';
 import Register from '../screens/Register';
+import ShippingOrderScreen from '../screens/ShippingOrderScreen';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -51,6 +52,8 @@ const index = () => {
 			</Route>
 			<PrivateRoute exact path='/customer/orders' component={Order} />
 			<PrivateRoute exact path='/customer' component={DashboardCustomer} />
+			<PrivateRoute exact path='/checkout' component={ShippingOrderScreen} />
+
 			<AdminRoute path='/admin/dashboard' component={Dashboard}></AdminRoute>
 			<AdminRoute
 				path='/admin/products/add'

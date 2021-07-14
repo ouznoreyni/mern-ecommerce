@@ -5,9 +5,9 @@ const DashboardCustomer = () => {
 	console.log('custoler');
 	return (
 		<MainLayout>
-			<div>
-				<h2>Dashboard</h2>
-			</div>
+			<h2>Dashboard</h2>
+			<h2>Commandes</h2>
+			{/* Commande	Date	État	Total	Actions */}
 		</MainLayout>
 	);
 };

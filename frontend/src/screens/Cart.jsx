@@ -99,14 +99,31 @@ const Cart = () => {
 									<span>Coût total</span>
 									<span>{totalProduct} franc cfa</span>
 								</div>
-								<button className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full'>
-									Valider la commande
-								</button>
+								<Link to='/checkout'>
+									<button className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full'>
+										Valider la commande
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>
 				) : (
-					<h2>Vous n'avez pas des products dans votre panier </h2>
+					<div className='grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 w-full'>
+						<img
+							src='assets/img/empty-cart.png'
+							width='500'
+							alt='cart is empty'
+							className='flex-wrap'
+						/>
+						<div>
+							<h2 className='center'>
+								Vous n'avez pas des products dans votre panier{' '}
+							</h2>
+							<p>
+								Veuillez faire vos achats <Link to='/products'>ici</Link>
+							</p>
+						</div>
+					</div>
 				)}
 			</div>
 		</MainLayout>
