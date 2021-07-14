@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import BillingInformations from '../components/BillingInformations';
 import MainLayout from '../components/layout/MainLayout';
+import Payment from '../components/Payment';
+import ShippingAddress from '../components/ShippingAddress';
 import Stepper from '../components/Stepper';
 
 const ShippingOrderScreen = () => {
 	const [currentStep, setCurrentStep] = useState(1);
 
 	const stepArray = ['Détails de facturation', 'Livraison', 'Paiement'];
-	const components = [
-		'Formulaire Détails de facturation',
-		'Formulaire Livraison',
-		'Formulaire de Paiement',
-	];
+
 	const handleClick = (clickType) => {
 		let newStep = currentStep;
 		clickType == 'next' ? newStep++ : newStep--;
@@ -22,6 +21,13 @@ const ShippingOrderScreen = () => {
 	const handleCheckout = () => {
 		console.log('payer');
 	};
+
+	const components = [
+		<BillingInformations />,
+		<ShippingAddress />,
+		<Payment />,
+	];
+
 	return (
 		<MainLayout>
 			<>
