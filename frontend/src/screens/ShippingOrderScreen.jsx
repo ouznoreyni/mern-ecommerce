@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import * as Yup from 'yup';
 import BillingInformations from '../components/BillingInformations';
 import MainLayout from '../components/layout/MainLayout';
 import Payment from '../components/Payment';
@@ -6,12 +8,35 @@ import ProductOrder from '../components/ProductOrder';
 import ShippingAddress from '../components/ShippingAddress';
 import Stepper from '../components/Stepper';
 
+const validationSchema = Yup.object().shape({
+	telephone: Yup.string().required('Required').min(5).max(50),
+	country: Yup.string().required('Required').min(5).max(50),
+	region: Yup.string().required('Required').min(5).max(50),
+	city: Yup.string().required('Required').min(5).max(50),
+});
+
 const ShippingOrderScreen = () => {
+	const currentUserSelector = useSelector(
+		(state) => state.entities.auth.currentUser
+	);
 	const [currentStep, setCurrentStep] = useState(1);
+	const [billingInformations, setBillingInformations] = useState({
+		telephone: '',
+		country: '',
+		region: '',
+		city: '',
+	});
 
 	const stepArray = ['Détails de facturation', 'Livraison', 'Paiement'];
 
-	const handleClick = (clickType) => {
+	const handleClick = async (clickType) => {
+		if (
+			currentStep === 1 &&
+			!(await validationSchema.isValid(billingInformations))
+		) {
+			alert('veillez saisir les information de livraison svp!');
+			return;
+		}
 		let newStep = currentStep;
 		clickType === 'next' ? newStep++ : newStep--;
 		// Check if steps are within the boundary
@@ -19,14 +44,31 @@ const ShippingOrderScreen = () => {
 			setCurrentStep(newStep);
 		}
 	};
-	const handleCheckout = () => {
-		console.log('payer');
+	const handleCheckout = async () => {
+		const isValide = await validationSchema.validate(billingInformations);
+		console.log('valide ', isValide);
+
+		console.log('payer ', billingInformations);
+	};
+
+	const onChange = (e) => {
+		setBillingInformations((prev) => ({
+			...prev,
+			[e.target.name]: e.target.value,
+		}));
+	};
+
+	const onChangePayment = (e) => {
+		console.log('change');
 	};
 
 	const components = [
-		<BillingInformations />,
-		<ShippingAddress />,
-		<Payment />,
+		<BillingInformations onChange={onChange} values={billingInformations} />,
+		<ShippingAddress
+			values={billingInformations}
+			currentUser={currentUserSelector}
+		/>,
+		<Payment onChange={onChangePayment} />,
 	];
 
 	return (
