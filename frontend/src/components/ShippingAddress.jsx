@@ -2,8 +2,10 @@ import React from 'react';
 
 const ShippingAddress = ({ onChange }) => {
 	return (
-		<div>
-			<h2>1dresse de livraison</h2>
+		<div class='mt-8 lg:w-3/4'>
+			<div>Contact: ouznoreyni@gmail.com</div>
+			<hr />
+			<div>Adresse:Diourbel</div>
 		</div>
 	);
 };
