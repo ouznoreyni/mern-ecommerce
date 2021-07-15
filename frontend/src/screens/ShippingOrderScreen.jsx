@@ -68,7 +68,7 @@ const ShippingOrderScreen = () => {
 			values={billingInformations}
 			currentUser={currentUserSelector}
 		/>,
-		<Payment onChange={onChangePayment} />,
+		<Payment onChange={onChangePayment} handleCheckout={handleCheckout} />,
 	];
 
 	return (
