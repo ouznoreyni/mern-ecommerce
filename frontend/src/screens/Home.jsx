@@ -20,12 +20,12 @@ const Home = () => {
 	useEffect(() => {
 		dispatch(loadProducts());
 		return () => {};
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getTopProduct());
 		return () => {};
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<MainLayout>
@@ -60,18 +60,19 @@ const Home = () => {
 			{/* info and satisfaction */}
 			{/* lastest and top products */}
 			<div className='mt-5'>
-				<h2 className='w-full text-center'>Dernières nouveautés</h2>
+				<h2 className='w-full text-center text-4xl'>Dernières nouveautés</h2>
 				<div className='flex content-center'>
-					<div className='grid 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
+					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
 						{productsSelector.map((p) => (
 							<CardProduct key={p._id} product={p} />
 						))}
 					</div>
 				</div>
-				<h2 className='w-full text-center mt-4'>Les plus demandés</h2>
-				<div className='mt-5'>
+				<hr />
+				<h2 className='w-full text-center mt-14 text-4xl'>Les plus demandés</h2>
+				<div className='flex content-center'>
 					{/* <MultiplePoductsSlide products={productsTOp} /> */}
-					<div className='grid 2xl:grid-cols-6 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
+					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
 						{topProductsSelector.map((p) => (
 							<CardProduct key={p._id} product={p} />
 						))}

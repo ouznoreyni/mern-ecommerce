@@ -50,20 +50,26 @@ const ProductListAdmin = () => {
 						ajouter
 					</Link>
 					<div className='inline-block min-w-full shadow-2xl rounded-lg overflow-hidden'>
-						{/* tables products */}
-						<ProductTable
-							sortColumn={sortColumn}
-							products={productsSelector.list.products}
-							onDelete={handleDelete}
-							onSort={handleSort}
-						/>
-						{/* tables products */}
-						<Pagination
-							currentPage={currentPage}
-							itemsCount={itemsCount}
-							pageSize={pageSize}
-							onPageChange={(page) => handlePageChange(page)}
-						/>
+						{!productsSelector.list.products ? (
+							'loading'
+						) : (
+							<>
+								{/* tables products */}
+								<ProductTable
+									sortColumn={sortColumn}
+									products={productsSelector.list.products}
+									onDelete={handleDelete}
+									onSort={handleSort}
+								/>
+								{/* tables products */}
+								<Pagination
+									currentPage={currentPage}
+									itemsCount={itemsCount}
+									pageSize={pageSize}
+									onPageChange={(page) => handlePageChange(page)}
+								/>
+							</>
+						)}
 					</div>
 				</div>
 			</div>

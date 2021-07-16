@@ -36,8 +36,18 @@ const productSlice = createSlice({
 			state.loading = false;
 			state.lastFetch = Date.now();
 		},
+		productsAddRequested: (state, action) => {
+			state.loading = true;
+			state.product = {};
+		},
 		productAdded: (state, action) => {
 			state.list.products.push(action.payload);
+			state.product = {};
+			state.loading = false;
+		},
+		productsAddFailed: (state, action) => {
+			state.loading = false;
+			state.message = action.payload;
 			state.product = {};
 		},
 		productDeleted: (state, action) => {
@@ -70,6 +80,8 @@ const {
 	productSearch,
 	productReceived,
 	topProductsReceived,
+	productsAddFailed,
+	productsAddRequested,
 } = productSlice.actions;
 
 /*Action Creators*/
@@ -104,7 +116,9 @@ export const addProduct = (product) =>
 		url,
 		method: 'post',
 		data: product,
+		onStart: productsAddRequested.type,
 		onSucces: productAdded.type,
+		onError: productsAddFailed.type,
 	});
 
 export const updateProduct = (product) =>

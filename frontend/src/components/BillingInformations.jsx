@@ -73,7 +73,7 @@ const BillingInformations = ({ onChange, values }) => {
 					name='city'
 					id='city'
 					className={`w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline`}
-					placeholder='Diourbel'
+					placeholder='Touba'
 					onChange={onChange}
 					value={values.city}
 				/>

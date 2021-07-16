@@ -4,6 +4,7 @@ import CardProduct from '../components/card/cardProduct';
 import Pagination from '../components/common/Pagination';
 import MainLayout from '../components/layout/MainLayout';
 import MenuSideBar from '../components/layout/MenuSideBar';
+import SpinnerLoading from '../components/loading/SpinnerLoading';
 import { loadProducts, searchProduct } from '../store/ProductSlice';
 
 const Products = () => {
@@ -75,17 +76,23 @@ const Products = () => {
 							<option value='asc'>Tri par tarif croissant</option>
 						</select>
 					</div>
-					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6  p-8'>
-						{productsSelector.list.products.map((p) => (
-							<CardProduct key={p._id} product={p} />
-						))}
-					</div>
-					<Pagination
-						currentPage={currentPage}
-						itemsCount={itemsCount}
-						pageSize={pageSize}
-						onPageChange={(page) => handlePageChange(page)}
-					/>
+					{productsSelector.loading ? (
+						<SpinnerLoading />
+					) : (
+						<>
+							<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6  p-8'>
+								{productsSelector.list.products.map((p) => (
+									<CardProduct key={p._id} product={p} />
+								))}
+							</div>
+							<Pagination
+								currentPage={currentPage}
+								itemsCount={itemsCount}
+								pageSize={pageSize}
+								onPageChange={(page) => handlePageChange(page)}
+							/>
+						</>
+					)}
 				</div>
 				{/* end list products*/}
 			</div>

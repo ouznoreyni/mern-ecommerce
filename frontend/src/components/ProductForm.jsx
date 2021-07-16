@@ -1,9 +1,12 @@
 import { Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import useCategories from '../hooks/useCategories';
+import useProducts from '../hooks/useProducts';
 import { addProduct } from '../store/ProductSlice';
+
 const validationSchema = Yup.object().shape({
 	title: Yup.string().required('Required').min(5).max(150),
 	brand: Yup.string().required('Required').min(5).max(50),
@@ -25,8 +28,11 @@ const initialValues = {
 
 const ProductForm = ({ product = {} }) => {
 	const dispatch = useDispatch();
+	const products = useProducts();
+	const history = useHistory();
 	const categories = useCategories();
 	const [file, setfile] = useState();
+	const [isSubmitted, setisSubmitted] = useState(false);
 
 	const onSubmit = async (product) => {
 		if (!file) {
@@ -39,8 +45,14 @@ const ProductForm = ({ product = {} }) => {
 		}
 		data.append('image', file);
 		dispatch(addProduct(data));
+		setisSubmitted(true);
 	};
-
+	useEffect(() => {
+		if (isSubmitted && !products.message) {
+			history.push('/admin/products');
+		}
+		return () => {};
+	}, [isSubmitted, products, products.message]);
 	return (
 		<>
 			<Formik
