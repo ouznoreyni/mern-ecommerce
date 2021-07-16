@@ -9,7 +9,7 @@ import { registerUser } from '../store/AuthSlice';
 
 const validationSchema = Yup.object().shape({
 	firstName: Yup.string().required('Required').min(5).max(50),
-	lastName: Yup.string().required('Required').min(5).max(50),
+	lastName: Yup.string().required('Required').min(2).max(40),
 	email: Yup.string().email().required('Required').min(5).max(50),
 	password: Yup.string().required('Required').min(5).max(50),
 	repeat_password: Yup.string().oneOf(

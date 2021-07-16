@@ -2,8 +2,8 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
+import useCategories from '../hooks/useCategories';
 import { addProduct } from '../store/ProductSlice';
-
 const validationSchema = Yup.object().shape({
 	title: Yup.string().required('Required').min(5).max(150),
 	brand: Yup.string().required('Required').min(5).max(50),
@@ -25,7 +25,9 @@ const initialValues = {
 
 const ProductForm = ({ product = {} }) => {
 	const dispatch = useDispatch();
+	const categories = useCategories();
 	const [file, setfile] = useState();
+
 	const onSubmit = async (product) => {
 		if (!file) {
 			console.log('ajouter un fichier');
@@ -171,9 +173,9 @@ const ProductForm = ({ product = {} }) => {
 									value={values.category}
 									onChange={handleChange}
 								>
-									<option value='60d1cf4ee7c73a3ee4dfe294'>Categorie 1</option>
-									<option value='1'>Categorie 2</option>
-									<option value='1'>Categorie 3</option>
+									{categories.list.categories.map((c) => (
+										<option value={c._id}>{c.name}</option>
+									))}
 								</select>
 							</div>
 

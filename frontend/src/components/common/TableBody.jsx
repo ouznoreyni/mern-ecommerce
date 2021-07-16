@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { converTobase64 } from '../../utils/convertTobase64';
 
 const TableBody = (props) => {
 	const currentUser = useSelector((state) => state.entities.auth.currentUser);
@@ -41,7 +42,10 @@ const TableBody = (props) => {
 										<div className='flex-shrink-0 w-10 h-10 float-right'>
 											<img
 												className='w-full h-full rounded-full '
-												src={renderCell(item, column)}
+												// src={renderCell(item, column)}
+												src={`data:image/jpeg;base64,${converTobase64(
+													renderCell(item, column)
+												)}`}
 												alt='produit'
 											/>
 										</div>

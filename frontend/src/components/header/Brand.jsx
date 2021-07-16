@@ -60,8 +60,16 @@ const Brand = () => {
 								</button>
 								<ul className='dropdown-menu hidden absolute w-full topHeader  text-gray-700 pt-2 '>
 									<li className='topHeader'>
-										<Link className='text-white font-semibold  py-2 px-1 rounded'>
-											Compte
+										<Link
+											to={currentUser.isAdmin ? 'admin/dashboard' : 'customer'}
+											className='text-white font-semibold  py-2 px-1 rounded'
+										>
+											Dashboard
+										</Link>
+									</li>
+									<li className='topHeader'>
+										<Link className='text-white font-semibold  py-2 mt-4 px-1 rounded'>
+											Profil
 										</Link>
 									</li>
 									<li className='topHeader'>
