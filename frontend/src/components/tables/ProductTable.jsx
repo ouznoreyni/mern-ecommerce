@@ -20,7 +20,7 @@ const ProductTable = (props) => {
 		{ path: 'title', label: 'title' },
 		{ path: 'countInStock', label: 'Stock' },
 		{ path: 'price', label: 'prix' },
-		{ path: 'category', label: 'categorie' },
+		{ path: 'category.name', label: 'categorie' },
 		{ path: 'createdAt', label: 'ajouté' },
 	];
 

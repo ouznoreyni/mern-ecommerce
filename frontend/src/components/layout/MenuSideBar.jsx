@@ -7,7 +7,7 @@ const MenuSideBar = () => {
 				Categories
 			</div>
 			<ul className='mt-8 border-t'>
-				<li>
+				{/* <li>
 					<button className='py-3 px-6 font-semibold'>Vetement</button>
 				</li>
 				<li>
@@ -15,7 +15,7 @@ const MenuSideBar = () => {
 				</li>
 				<li>
 					<button className='py-3 px-6 font-semibold'>Sac</button>
-				</li>
+				</li> */}
 			</ul>
 		</div>
 	);

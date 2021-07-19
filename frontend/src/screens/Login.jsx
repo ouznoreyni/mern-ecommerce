@@ -19,17 +19,21 @@ const Login = (props) => {
 
 	useEffect(() => {
 		if (currentUser && currentUser._id) {
-			try {
-				if (currentUser.isAdmin) {
-					history.push('/admin/dashboard');
-				} else {
-					history.push('/customer');
+			if (history.location.state) {
+				history.push(history.location.state.from.pathname);
+			} else {
+				try {
+					if (currentUser.isAdmin) {
+						history.push('/admin/dashboard');
+					} else {
+						history.push('/customer');
+					}
+				} catch (error) {
+					console.log(error);
 				}
-			} catch (error) {
-				console.log(error);
 			}
 		}
-	},[currentUser, history]);
+	}, [currentUser, history]);
 
 	const onSubmit = async (credentials) => {
 		dispatch(loginUser(credentials));

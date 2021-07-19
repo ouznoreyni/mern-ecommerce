@@ -29,7 +29,6 @@ const ProductDetails = (props) => {
 	}, []);
 	return (
 		<MainLayout>
-			{' '}
 			<div className='py-6'>
 				<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
 					<div className='flex items-center space-x-2 text-gray-400 text-sm'>
@@ -57,16 +56,13 @@ const ProductDetails = (props) => {
 					<div className='flex flex-col md:flex-row -mx-4'>
 						<div className='md:flex-1 px-4'>
 							<div>
-								<div className='h-64 md:h-80 rounded-lg bg-gray-100 mb-4'>
-									<div
-										className='h-64 md:h-80 rounded-lg  mb-4 flex items-center justify-center'
-										style={{
-											backgroundImage: `url(data:image/jpeg;base64,${converTobase64(
-												product
-											)})`,
-											backgroundSize: 'cover',
-										}}
-									></div>
+								<div className='rounded-lg bg-gray-100 mb-4'>
+									<div className='rounded-lg  mb-4 flex items-center justify-center'>
+										<img
+											src={`data:image/jpeg;base64,${converTobase64(product)}`}
+											alt=''
+										/>
+									</div>
 								</div>
 
 								<div className='flex -mx-2 mb-4'>

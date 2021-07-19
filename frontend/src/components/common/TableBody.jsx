@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { converTobase64 } from '../../utils/convertTobase64';
 
@@ -20,6 +20,11 @@ const TableBody = (props) => {
 			return item._id + (column.path || column.key);
 		}
 	};
+	useEffect(() => {
+		console.log('users ', currentUser);
+		console.log('col ', columns);
+		return () => {};
+	}, []);
 
 	const { data, columns } = props;
 	console.log(data);

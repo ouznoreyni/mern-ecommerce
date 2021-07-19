@@ -31,7 +31,7 @@ export const getProducts = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(skip)
     .sort(sort)
-
+    .populate(['category'])
   const params = {
     page,
     totalProducts: count,
