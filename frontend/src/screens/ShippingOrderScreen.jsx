@@ -70,7 +70,12 @@ const ShippingOrderScreen = () => {
 			values={billingInformations}
 			currentUser={currentUserSelector}
 		/>,
-		<Payment onChange={onChangePayment} handleCheckout={handleCheckout} />,
+		<Payment
+			onChange={onChangePayment}
+			handleCheckout={handleCheckout}
+			billingDetails={billingInformations}
+			currentUser={currentUserSelector}
+		/>,
 	];
 	const stripePromise = loadStripe(
 		'pk_test_51IalM5Bjjql6rkH63LIHF05PxYcIQfKDUQqolhaqvEl5D88PXPaWesCfEG6COyaZF4jyg1uimkOTI52m5GTcS4U700mygP3Bpw'

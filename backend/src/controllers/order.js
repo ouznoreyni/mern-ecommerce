@@ -3,6 +3,8 @@ import Order from '../models/order'
 import Product from '../models/product'
 import { validateAddnewOrder } from '../validations/order'
 
+// const stripe = stripe(process.env.STRIPE_SECRET_TEST)
+
 // @desc    Fetch all Orders
 // @route   GET /api/orders
 // @access  Public
@@ -90,6 +92,17 @@ export const addNewOrder = asyncHandler(async (req, res) => {
       shippingPrice: 2000,
       totalPrice,
     })
+    // console.log('stripe-routes.js 9 | route reached', req.body)
+    // let { amount, id } = req.body
+    // console.log('stripe-routes.js 10 | amount and id', amount, id)
+    // const payment = await stripe.paymentIntents.create({
+    //   amount: amount,
+    //   currency: 'USD',
+    //   description: 'ouznoreyni stroe',
+    //   payment_method: id,
+    //   confirm: true,
+    // })
+    // console.log('stripe-routes.js 19 | payment', payment)
     await order.save()
     return res.status(200).json({ order })
   } catch (error) {

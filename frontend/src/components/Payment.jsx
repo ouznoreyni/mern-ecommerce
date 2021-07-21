@@ -36,7 +36,7 @@ const SubmitButton = ({ processing, error, children, disabled }) => (
 		type='submit'
 		disabled={processing || disabled}
 	>
-		{processing ? 'Processing...' : children}
+		{processing ? 'Paiment en cours...' : children}
 	</button>
 );
 
@@ -67,18 +67,13 @@ const ResetButton = ({ onClick }) => (
 	</button>
 );
 
-const Payment = ({ onChange, handleCheckout }) => {
+const Payment = ({ onChange, handleCheckout, billingDetails, currentUser }) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const [error, setError] = useState(null);
 	const [cardComplete, setCardComplete] = useState(false);
 	const [processing, setProcessing] = useState(false);
 	const [paymentMethod, setPaymentMethod] = useState(null);
-	const [billingDetails, setBillingDetails] = useState({
-		email: '',
-		phone: '',
-		name: '',
-	});
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -97,13 +92,22 @@ const Payment = ({ onChange, handleCheckout }) => {
 		if (cardComplete) {
 			setProcessing(true);
 		}
-		console.log('biling ', billingDetails);
+
 		const payload = await stripe.createPaymentMethod({
 			type: 'card',
 			card: elements.getElement(CardElement),
-			billing_details: billingDetails,
+			billing_details: {
+				address: {
+					country: 'SN',
+					city: billingDetails.city,
+					state: billingDetails.region,
+				},
+				email: currentUser.email,
+				name: `${currentUser.firstName} ${currentUser.lastName}`,
+				phone: billingDetails.telephone,
+			},
 		});
-
+		console.log('payload ', payload);
 		setProcessing(false);
 
 		if (payload.error) {
@@ -117,11 +121,6 @@ const Payment = ({ onChange, handleCheckout }) => {
 		setError(null);
 		setProcessing(false);
 		setPaymentMethod(null);
-		setBillingDetails({
-			email: '',
-			phone: '',
-			name: '',
-		});
 	};
 
 	return paymentMethod ? (
