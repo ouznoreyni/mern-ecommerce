@@ -1,3 +1,5 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -70,10 +72,12 @@ const ShippingOrderScreen = () => {
 		/>,
 		<Payment onChange={onChangePayment} handleCheckout={handleCheckout} />,
 	];
-
+	const stripePromise = loadStripe(
+		'pk_test_51IalM5Bjjql6rkH63LIHF05PxYcIQfKDUQqolhaqvEl5D88PXPaWesCfEG6COyaZF4jyg1uimkOTI52m5GTcS4U700mygP3Bpw'
+	);
 	return (
 		<MainLayout>
-			<>
+			<Elements stripe={stripePromise}>
 				<div className='container horizontal mt-5 mb-12'>
 					<Stepper steps={stepArray} currentStepNumber={currentStep} />
 				</div>
@@ -113,7 +117,7 @@ const ShippingOrderScreen = () => {
 							: `Poursuivre vers ${stepArray[currentStep]}`}
 					</button>
 				</div>
-			</>
+			</Elements>
 		</MainLayout>
 	);
 };
