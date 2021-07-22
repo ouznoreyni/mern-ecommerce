@@ -1,17 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import Table from '../common/Table';
 
 const UserTable = (props) => {
-	const currentUser = useSelector((state) => state.entities.auth.currentUser);
-	useEffect(() => {
-		try {
-			if (currentUser && currentUser.isAdmin) columns.push(addDeleteColumn());
-		} catch (error) {
-			console.log(error);
-		}
-	});
-
 	const columns = [
 		{
 			path: 'firstName',
@@ -20,21 +10,8 @@ const UserTable = (props) => {
 		{ path: 'lastName', label: 'nom' },
 		{ path: 'email', label: 'email' },
 		{ path: 'isAdmin', label: 'admin' },
+		{ path: 'actions', label: 'actions' },
 	];
-
-	const addDeleteColumn = () => {
-		return {
-			key: 'supprimer',
-			content: (product) => (
-				<button
-					onClick={() => props.onDelete(product._id)}
-					className='btn btn-danger'
-				>
-					supprimer
-				</button>
-			),
-		};
-	};
 
 	const { users, onSort, sortColumn } = props;
 

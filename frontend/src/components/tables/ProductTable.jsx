@@ -1,17 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import Table from '../common/Table';
 
 const ProductTable = (props) => {
-	const currentUser = useSelector((state) => state.entities.auth.currentUser);
-	useEffect(() => {
-		try {
-			if (currentUser && currentUser.isAdmin) columns.push(addDeleteColumn());
-		} catch (error) {
-			console.log(error);
-		}
-	});
-
 	const columns = [
 		{
 			path: 'image',
@@ -22,20 +12,17 @@ const ProductTable = (props) => {
 		{ path: 'price', label: 'prix' },
 		{ path: 'category.name', label: 'categorie' },
 		{ path: 'createdAt', label: 'ajouté' },
+		{ path: 'actions', label: 'actions' },
 	];
 
-	const addDeleteColumn = () => {
-		return {
-			key: 'supprimer',
-			content: (product) => (
-				<button
-					onClick={() => props.onDelete(product._id)}
-					className='btn btn-danger'
-				>
-					supprimer
-				</button>
-			),
-		};
+	const onDelete = (item) => {
+		console.log('deleted ', item);
+	};
+	const onGetItem = (item) => {
+		console.log('onGetItem ', item);
+	};
+	const onUpdate = (item) => {
+		console.log('onUpdate ', item);
 	};
 
 	const { products, onSort, sortColumn } = props;
@@ -46,6 +33,9 @@ const ProductTable = (props) => {
 			columns={columns}
 			onSort={onSort}
 			sortColumn={sortColumn}
+			onDelete={onDelete}
+			onGetItem={onGetItem}
+			onUpdate={onUpdate}
 		/>
 	);
 };

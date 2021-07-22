@@ -31,11 +31,11 @@ const Home = () => {
 		<MainLayout>
 			{/* slide des produits */}
 			<div className='container mx-auto'>
-				<ProductCarousel />
+				<ProductCarousel products={productsSelector.slice(0, 4)} />
 			</div>
 			{/* slide des produits */}
 			{/* info and satisfaction */}
-			<div className='grid grid-flow-col grid-cols-4 grid-rows-1 gap-4 mt-10 p-5 border-2  w-full lg:w-4/5 lg:ml-24 xl:w-4/5 xl:ml-24 2xl:w-4/5 2xl:ml-24'>
+			<div className='grid grid-flow-col grid-cols-4 grid-rows-1 gap-4 mt-20 p-5 border-2  w-full lg:w-4/5 lg:ml-24 xl:w-4/5 xl:ml-24 2xl:w-4/5 2xl:ml-24'>
 				<div className='border-r-2'>
 					<h6 className='font-bold text-xs'>BONUS PLUS</h6>
 					<p className='text-xs'>
