@@ -9,6 +9,7 @@ const Cart = () => {
 	const [totalProduct, setTotalProduct] = useState();
 	const dispatch = useDispatch();
 	const cartSelector = useSelector((state) => state.entities.cart);
+
 	useEffect(() => {
 		setTotalProduct(calculateTotalProduct(cartSelector));
 		return () => {};
@@ -19,6 +20,7 @@ const Cart = () => {
 		cartSelector.list.cartItems.map((item) => {
 			const { product, quantity } = item;
 			total += product.price * quantity;
+			return item;
 		});
 		return total;
 	};
@@ -26,6 +28,7 @@ const Cart = () => {
 	const handleClearCart = () => {
 		dispatch(clearItemCart());
 	};
+
 	return (
 		<MainLayout>
 			<div className='container mx-auto mt-10'>
@@ -117,7 +120,7 @@ const Cart = () => {
 						/>
 						<div>
 							<h2 className='center'>
-								Vous n'avez pas des products dans votre panier{' '}
+								Vous n'avez pas des products dans votre panier
 							</h2>
 							<p>
 								Veuillez faire vos achats <Link to='/products'>ici</Link>

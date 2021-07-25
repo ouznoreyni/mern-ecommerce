@@ -6,11 +6,11 @@ import { converTobase64 } from '../../utils/convertTobase64';
 
 const CardProduct = ({ product }) => {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
-		console.log('p ', product.image.data);
 		converTobase64(product);
 		return () => {};
-	}, []);
+	}, [product]);
 
 	const addCart = async (product) => {
 		console.log('product ', product, ' added to the cart');

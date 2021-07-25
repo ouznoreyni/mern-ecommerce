@@ -14,19 +14,14 @@ const ProductDetails = (props) => {
 		const getProduct = async (id) => {
 			try {
 				const { data } = await productsService.retrieve(id);
-				console.log('data ', data);
 				setProduct(data.product);
 			} catch (error) {
 				history.push('/not-found');
 			}
 		};
 		getProduct(id);
-	}, []);
+	}, [history, id]);
 
-	useEffect(() => {
-		console.log('prod', product);
-		return () => {};
-	}, []);
 	return (
 		<MainLayout>
 			<div className='py-6'>

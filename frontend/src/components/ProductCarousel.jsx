@@ -20,7 +20,7 @@ const ProductCarousel = ({ products }) => {
 	) : (
 		<Slider {...settings}>
 			{products.map((product) => (
-				<div key={product.name}>
+				<div key={product._id}>
 					<Link to='#' className='h-1/4 rounded-lg shadow-lg bg-gray-600'>
 						<img
 							className='inline-block'

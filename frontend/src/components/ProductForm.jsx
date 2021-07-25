@@ -47,12 +47,14 @@ const ProductForm = ({ product = {} }) => {
 		dispatch(addProduct(data));
 		setisSubmitted(true);
 	};
+
 	useEffect(() => {
 		if (isSubmitted && !products.message) {
 			history.push('/admin/products');
 		}
 		return () => {};
-	}, [isSubmitted, products, products.message]);
+	}, [history, isSubmitted, products, products.message]);
+
 	return (
 		<>
 			<Formik

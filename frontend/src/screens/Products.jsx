@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { batch, useDispatch, useSelector } from 'react-redux';
 import CardProduct from '../components/card/cardProduct';
 import Pagination from '../components/common/Pagination';
 import MainLayout from '../components/layout/MainLayout';
 import MenuSideBar from '../components/layout/MenuSideBar';
 import SpinnerLoading from '../components/loading/SpinnerLoading';
-import { loadProducts, searchProduct } from '../store/ProductSlice';
+import { loadProducts } from '../store/ProductSlice';
 
 const Products = () => {
 	const productsSelector = useSelector((state) => state.entities.product);
@@ -19,9 +19,9 @@ const Products = () => {
 		console.log('filter=>', target.name, '=>', target.value);
 	};
 	const onSearch = ({ target }) => {
-		console.log('search ', target.value);
-		dispatch(searchProduct(target.value));
-		console.log('search ==>', productsSelector);
+		// console.log('search ', target.value);
+		// dispatch(searchProduct(target.value));
+		// console.log('search ==>', productsSelector);
 	};
 
 	const handlePageChange = (page) => {
@@ -29,7 +29,9 @@ const Products = () => {
 		dispatch(loadProducts(page));
 	};
 	useEffect(() => {
-		dispatch(loadProducts());
+		batch(() => {
+			dispatch(loadProducts());
+		});
 	}, [dispatch]);
 
 	useEffect(() => {

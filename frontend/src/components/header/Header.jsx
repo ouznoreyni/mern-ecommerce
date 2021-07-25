@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Brand from './Brand';
 const Header = ({ onPressCart }) => {
 	const cartSelector = useSelector((state) => state.entities.cart);
-	useEffect(() => {
-		console.log('card selector==>', cartSelector);
-		return () => {};
-	}, []);
+
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
 	const handleToggleDropDown = () => setIsDropDownOpen(!isDropDownOpen);
+
 	return (
 		<header>
 			<Brand />

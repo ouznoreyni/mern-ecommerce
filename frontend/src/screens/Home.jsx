@@ -1,29 +1,40 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { batch, useDispatch, useSelector } from 'react-redux';
 import CardProduct from '../components/card/cardProduct';
 import MainLayout from '../components/layout/MainLayout';
 import ProductCarousel from '../components/ProductCarousel';
+import useProducts from '../hooks/useProducts';
 import { getTopProduct, loadProducts } from '../store/ProductSlice';
+
 const Home = () => {
+	const { list } = useProducts();
 	const dispatch = useDispatch();
+
 	const topProductsSelector = useSelector(
 		(state) => state.entities.product.topProducts
 	);
-	const productsSelector = useSelector(
-		(state) => state.entities.product.list.products
-	);
+	// const productsSelector = useSelector(
+	// 	(state) => state.entities.product.list.products
+	// );
 	// const [products] = useState(data.products.slice(0, 4));
 	// const [productsTOp] = useState(data.products.slice(0, 8));
 	// const productState = useSelector((state) => state.entities.product.entities);
 	// const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(loadProducts());
+		batch(() => {
+			console.log('load once product');
+			dispatch(loadProducts());
+		});
+
 		return () => {};
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getTopProduct());
+		batch(() => {
+			console.log('load once top prod');
+			dispatch(getTopProduct());
+		});
 		return () => {};
 	}, [dispatch]);
 
@@ -31,7 +42,7 @@ const Home = () => {
 		<MainLayout>
 			{/* slide des produits */}
 			<div className='container mx-auto'>
-				<ProductCarousel products={productsSelector.slice(0, 4)} />
+				<ProductCarousel products={list.products.slice(0, 4)} />
 			</div>
 			{/* slide des produits */}
 			{/* info and satisfaction */}
@@ -63,7 +74,7 @@ const Home = () => {
 				<h2 className='w-full text-center text-4xl'>Dernières nouveautés</h2>
 				<div className='flex content-center'>
 					<div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-2 2xl:ml-24 p-8'>
-						{productsSelector.map((p) => (
+						{list.products.map((p) => (
 							<CardProduct key={p._id} product={p} />
 						))}
 					</div>

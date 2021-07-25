@@ -18,7 +18,7 @@ const Stepper = ({ steps, currentStepNumber }) => {
 
 		const currentSteps = updateStep(currentStepNumber - 1, stepsState);
 		setStep(currentSteps);
-	}, []);
+	}, [currentStepNumber, steps]);
 
 	useEffect(() => {
 		const currentSteps = updateStep(

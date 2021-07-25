@@ -54,7 +54,6 @@ const productSlice = createSlice({
 			const products = state.list.products;
 			state.product = {};
 			const { _id } = action.payload;
-			console.log('pr ', products);
 			const existingProduct = products.find((p) => p._id === _id);
 			if (existingProduct) {
 				return products.filter((p) => p._id !== _id);

@@ -3,9 +3,9 @@ import './spinnerLoading.css';
 
 const SpinnerLoading = () => {
 	return (
-		<section class='wrapper'>
-			<div class='card'>
-				<div class='loading'>
+		<section className='wrapper'>
+			<div className='card'>
+				<div className='loading'>
 					<span></span>
 					<span></span>
 					<span></span>

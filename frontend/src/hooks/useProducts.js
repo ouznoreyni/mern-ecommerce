@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../store/ProductSlice';
 
 const useProducts = () => {
-	const productsSelector = useSelector((state) => state.entities.product);
 	const dispatch = useDispatch();
+	const productsSelector = useSelector((state) => state.entities.product);
 
 	useEffect(() => {
 		dispatch(loadProducts());

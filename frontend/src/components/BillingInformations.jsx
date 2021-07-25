@@ -1,12 +1,5 @@
 import React from 'react';
 
-const initialValues = {
-	telephone: '',
-	country: '',
-	region: '',
-	city: '',
-};
-
 const BillingInformations = ({ onChange, values }) => {
 	return (
 		<form className='px-8 pt-6 pb-8 mb-4 bg-white rounded'>

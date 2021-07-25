@@ -1,10 +1,9 @@
 import _ from 'lodash';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { converTobase64 } from '../../utils/convertTobase64';
 
 const TableBody = (props) => {
-	const currentUser = useSelector((state) => state.entities.auth.currentUser);
+	// const currentUser = useSelector((state) => state.entities.auth.currentUser);
 
 	const renderCell = (item, column) => {
 		if (column.content !== undefined) {
@@ -23,11 +22,6 @@ const TableBody = (props) => {
 			return item._id + (column.path || column.key);
 		}
 	};
-	useEffect(() => {
-		console.log('users ', currentUser);
-		console.log('col ', columns);
-		return () => {};
-	}, []);
 
 	const { data, columns } = props;
 	console.log(data);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../store/AuthSlice';
@@ -6,7 +6,6 @@ import { logout } from '../../store/AuthSlice';
 const Brand = () => {
 	const currentUser = useSelector((state) => state.entities.auth.currentUser);
 
-	useEffect(() => {}, [currentUser]);
 	const dispatch = useDispatch();
 
 	const handleLogout = () => dispatch(logout());
@@ -44,19 +43,9 @@ const Brand = () => {
 				<div className='flex text-sm'>
 					{currentUser && currentUser._id ? (
 						<>
-							{/* <button
-							className='p-2 ml-2 text-black bg-white font-semibold leading-none border border-gray-100 rounded hover:border-transparent hover:bg-gray-700 hover:text-white hover:border-white'
-						>
-							{currentUser.firstName}
-						</button>
-						<div className="block absolute mt-8 w-full hidden bg-red-500">
-							<h2>Button</h2>
-					<h2>Button</h2>
-					<h2>Button</h2></div> */}
-
 							<div className='dropdown inline-block relative'>
 								<button className='bg-white text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center'>
-									<span class='mr-1'>{currentUser.firstName}</span>
+									<span className='mr-1'>{currentUser.firstName}</span>
 								</button>
 								<ul className='dropdown-menu hidden absolute w-full topHeader  text-gray-700 pt-2 '>
 									<li className='topHeader'>
@@ -68,7 +57,10 @@ const Brand = () => {
 										</Link>
 									</li>
 									<li className='topHeader'>
-										<Link className='text-white font-semibold  py-2 mt-4 px-1 rounded'>
+										<Link
+											className='text-white font-semibold  py-2 mt-4 px-1 rounded'
+											to='/profil'
+										>
 											Profil
 										</Link>
 									</li>
