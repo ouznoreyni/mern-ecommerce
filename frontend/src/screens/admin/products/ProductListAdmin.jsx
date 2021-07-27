@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import AdminLayout from '../../../components/admin/AdminLayout';
 import Pagination from '../../../components/common/Pagination';
 import ProductTable from '../../../components/tables/ProductTable';
@@ -8,6 +9,7 @@ import useProducts from '../../../hooks/useProducts';
 import { loadProducts } from '../../../store/ProductSlice';
 
 const ProductListAdmin = () => {
+	const history = useHistory();
 	const productsSelector = useProducts();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize] = useState(10);
@@ -36,8 +38,28 @@ const ProductListAdmin = () => {
 	}, [dispatch, isMounted, productsSelector]);
 	const [sortColumn] = useState({ path: 'title', order: 'asc' });
 
-	const handleDelete = () => {};
+	const handleDelete = async (product) => {
+		console.log('product ', product);
+		const { isConfirmed } = await Swal.fire({
+			title: 'Suppression',
+			text: `Voullez vous supprimer le produit ${product.title}`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Oui',
+			cancelButtonText: 'Non',
+		});
+		console.log('res ', isConfirmed);
+	};
 	const handleSort = () => {};
+	const handleUpdate = (product) => {
+		history.push(`/admin/products/${product._id}/edit`);
+	};
+	const handleGetItem = (product) => {
+		console.log('get product ', product._id);
+		history.push(`/admin/products/${product._id}`);
+	};
 
 	return (
 		<AdminLayout>
@@ -60,6 +82,8 @@ const ProductListAdmin = () => {
 									products={productsSelector.list.products}
 									onDelete={handleDelete}
 									onSort={handleSort}
+									onUpdate={handleUpdate}
+									onGetItem={handleGetItem}
 								/>
 								{/* tables products */}
 								<Pagination

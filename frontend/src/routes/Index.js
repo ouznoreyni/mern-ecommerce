@@ -6,6 +6,8 @@ import Dashboard from '../screens/admin/Dashboard';
 import ErrorAdminPages from '../screens/admin/ErrorAdminPages';
 import OrderListAdmin from '../screens/admin/orders/OrderListAdmin';
 import ProductCreation from '../screens/admin/products/ProductCreation';
+import ProductDetailsAdmin from '../screens/admin/products/ProductDetailsAdmin';
+import ProductEditScreen from '../screens/admin/products/ProductEditScreen';
 import ProductListAdmin from '../screens/admin/products/ProductListAdmin';
 import UsersListAdmin from '../screens/admin/users/UsersListAdmin';
 import Cart from '../screens/Cart';
@@ -58,6 +60,14 @@ const index = () => {
 			<AdminRoute
 				path='/admin/products/add'
 				component={ProductCreation}
+			></AdminRoute>
+			<AdminRoute
+				path='/admin/products/:id/edit'
+				component={ProductEditScreen}
+			></AdminRoute>
+			<AdminRoute
+				path='/admin/products/:id'
+				component={ProductDetailsAdmin}
 			></AdminRoute>
 			<AdminRoute
 				path='/admin/products'

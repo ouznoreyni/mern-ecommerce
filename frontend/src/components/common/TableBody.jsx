@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import React from 'react';
 import { converTobase64 } from '../../utils/convertTobase64';
 
@@ -24,7 +25,7 @@ const TableBody = (props) => {
 	};
 
 	const { data, columns } = props;
-	console.log(data);
+	console.log('data ', data);
 	return (
 		<tbody className='p-2'>
 			{data.map((item) => (
@@ -48,20 +49,42 @@ const TableBody = (props) => {
 							)}
 							{column.path !== 'image' &&
 								column.path !== 'actions' &&
+								column.path !== 'createdAt' &&
+								column.path !== 'isAdmin' &&
 								renderCell(item, column)}
 
+							{column.path === 'createdAt' &&
+								moment(item.createdAt).subtract(10, 'days').calendar()}
+
+							{column.path === 'isAdmin' && item.isAdmin && (
+								<span>
+									<i class='fas fa-check-circle text-green-400'></i>
+								</span>
+							)}
+
+							{column.path === 'isAdmin' && !item.isAdmin && (
+								<span>
+									<i class='far fa-times-circle text-red-500'></i>
+								</span>
+							)}
 							{column.path === 'actions' && (
 								<>
 									<button
 										onClick={() => props.onGetItem(item)}
-										className='mr-1'
+										className='bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600 transition duration-200 each-in-out'
 									>
 										details
 									</button>
-									<button onClick={() => props.onUpdate(item)} className='mr-1'>
+									<button
+										className='bg-yellow-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-yellow-600 transition duration-200 each-in-out'
+										onClick={() => props.onUpdate(item)}
+									>
 										modifier
 									</button>
-									<button onClick={() => props.onDelete(item)}>
+									<button
+										className='bg-red-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-red-600 transition duration-200 each-in-out'
+										onClick={() => props.onDelete(item)}
+									>
 										supprimer
 									</button>
 								</>

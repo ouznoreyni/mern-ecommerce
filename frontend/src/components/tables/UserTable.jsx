@@ -10,6 +10,7 @@ const UserTable = (props) => {
 		{ path: 'lastName', label: 'nom' },
 		{ path: 'email', label: 'email' },
 		{ path: 'isAdmin', label: 'admin' },
+		{ path: 'createdAt', label: 'Ajouter' },
 		{ path: 'actions', label: 'actions' },
 	];
 

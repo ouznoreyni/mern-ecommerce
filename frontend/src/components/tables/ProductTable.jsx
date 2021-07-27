@@ -15,17 +15,7 @@ const ProductTable = (props) => {
 		{ path: 'actions', label: 'actions' },
 	];
 
-	const onDelete = (item) => {
-		console.log('deleted ', item);
-	};
-	const onGetItem = (item) => {
-		console.log('onGetItem ', item);
-	};
-	const onUpdate = (item) => {
-		console.log('onUpdate ', item);
-	};
-
-	const { products, onSort, sortColumn } = props;
+	const { products, onSort, sortColumn, onUpdate, onDelete, onGetItem } = props;
 
 	return (
 		<Table

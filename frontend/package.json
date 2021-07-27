@@ -26,6 +26,7 @@
 		"react-slick": "^0.28.1",
 		"react-toastify": "^7.0.4",
 		"slick-carousel": "^1.8.1",
+		"sweetalert2": "^11.0.20",
 		"web-vitals": "^1.0.1",
 		"yup": "^0.32.9"
 	},
